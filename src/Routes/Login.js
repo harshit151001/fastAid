@@ -34,10 +34,6 @@ const Login = () => {
               <button type="submit" class="btn btn-primary btn-block btn-login">
                 Sign in
               </button>
-
-              {/* <div class="sign-up">
-                Don't have an account? <a href="#">Create One</a>
-              </div> */}
             </form>
           </div>
         </div>

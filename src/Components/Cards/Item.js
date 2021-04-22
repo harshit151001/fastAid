@@ -1,6 +1,6 @@
 import React from "react";
 
-const Item = () => {
+const Item = ({ name, id, company, city, contact, quantity }) => {
   return (
     <div className="col-md col-md-6">
       <div className="card shadow-sm rounded input-group p-2 px-3 my-2 card-special">
