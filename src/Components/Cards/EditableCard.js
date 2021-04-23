@@ -145,7 +145,7 @@ const Item = ({ name, id, companyName, city, contactNumber, stock, address, crea
             }
           );
         } else {
-          Axios.post(`${process.env.REACT_APP_BACKEND}/product/update/${id}/${user._id}`, fd, config).then(
+          Axios.put(`${process.env.REACT_APP_BACKEND}/product/update/${id}/${user._id}`, fd, config).then(
             response => {
               console.log(response);
             },
