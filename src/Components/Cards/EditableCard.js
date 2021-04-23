@@ -1,7 +1,9 @@
+
 import React, { useState } from 'react';
 import { useImmerReducer } from 'use-immer';
 import { isAuthenticated } from '../../Helper/Enpoints/Endpoints';
 import Axios from 'axios';
+
 
 export function ourReducer(draft, action) {
   switch (action.type) {
@@ -167,16 +169,21 @@ const Item = ({ name, id, companyName, city, contactNumber, stock, address, crea
       <div className="card shadow-sm rounded input-group p-2 px-3 my-2 card-special">
         <div className="mb-0 d-flex justify-content-between align-items-center">
           <div className="h4 my-0 text-success">
+
             <input type="text" onChange={e => dispatch({ type: 'name', value: e.target.value })} disabled={disabled} placeholder="name" value={state.name.value} />
+
           </div>
         </div>
         <div className="mb-0 d-flex justify-content-between align-items-center">
           <div className="text-muted mb-0">
+
             <input onChange={e => dispatch({ type: 'companyName', value: e.target.value })} type="text" disabled={disabled} placeholder="Company Name" value={state.companyName.value} />
+
           </div>
         </div>
         <div className="mb-0">
           <strong>
+
             <input onChange={e => dispatch({ type: 'city', value: e.target.value })} type="text" disabled={disabled} placeholder="City" value={state.city.value} />
           </strong>
         </div>
@@ -188,6 +195,8 @@ const Item = ({ name, id, companyName, city, contactNumber, stock, address, crea
         </div>
         <div className="mb-0">
           <input type="text" onChange={e => dispatch({ type: 'stock', value: e.target.value })} disabled={disabled} placeholder="Quantity" value={state.stock.value} />
+
+
         </div>
         <div className="mb-0 d-flex justify-content-start align-items-center hid-on-large">
           <button style={{ width: '90px' }} type="button" className="btn btn-danger p-1 mt-2 me-2">
