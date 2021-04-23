@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 const Item = ({
   name,
@@ -21,7 +21,7 @@ const Item = ({
                 minWidth: "300px",
                 outline: "none",
                 border: "none",
-                background: "transparent",
+                background: disabled ? "transparent" : "#fafafa",
               }}
               type="text"
               disabled={disabled}
@@ -38,7 +38,7 @@ const Item = ({
                 minWidth: "300px",
                 outline: "none",
                 border: "none",
-                background: "transparent",
+                background: disabled ? "transparent" : "#fafafa",
               }}
               type="text"
               disabled={disabled}
@@ -54,7 +54,7 @@ const Item = ({
                 minWidth: "300px",
                 outline: "none",
                 border: "none",
-                background: "transparent",
+                background: disabled ? "transparent" : "#fafafa",
               }}
               type="text"
               disabled={disabled}
@@ -69,7 +69,7 @@ const Item = ({
               minWidth: "300px",
               outline: "none",
               border: "none",
-              background: "transparent",
+              background: disabled ? "transparent" : "#fafafa",
             }}
             type="text"
             disabled={disabled}
@@ -83,7 +83,7 @@ const Item = ({
               minWidth: "300px",
               outline: "none",
               border: "none",
-              background: "transparent",
+              background: disabled ? "transparent" : "#fafafa",
             }}
             type="text"
             disabled={disabled}
@@ -97,7 +97,7 @@ const Item = ({
               minWidth: "300px",
               outline: "none",
               border: "none",
-              background: "transparent",
+              background: disabled ? "transparent" : "#fafafa",
             }}
             type="text"
             disabled={disabled}
