@@ -73,3 +73,16 @@ export const createItem = async (userId, token) => {
     return data;
   }
 };
+
+export const getItemsForUser = async (userId, token) => {
+  const response = await fetch(`${process.env.REACT_APP_BACKEND}/products/user/${userId}`, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
+  if (response.status === 200) {
+    const data = await response.json();
+    return data.products;
+  }
+};

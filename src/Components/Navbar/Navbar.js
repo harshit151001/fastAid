@@ -6,7 +6,7 @@ const Navbar = ({ cities, setCity, city }) => {
   const handleChange = e => {
     setCity(e.target.value);
   };
-  console.log(isAuthenticated());
+
   return (
     <nav className="navbar-dark bg-dark">
       <div className="container-fluid d-md-flex p-2 justify-content-between">
