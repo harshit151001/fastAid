@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-const Navbar = () => {
+
+const Navbar = ({ cities }) => {
   return (
     <nav className="navbar-dark bg-dark">
       <div className="container-fluid d-md-flex p-2 justify-content-between">
@@ -15,10 +16,11 @@ const Navbar = () => {
         <div className="d-md-flex">
           <form className="d-flex mx-md-2 mt-2 mt-md-0">
             <select className="form-select" aria-label="Default select example">
-              <option selected>Open this select menu</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
+              {cities.map(({ name, _id }) => (
+                <option key={_id} value={_id}>
+                  {name}
+                </option>
+              ))}
             </select>
           </form>
           <form className="d-flex mx-md-2 mt-2 mt-md-0">
