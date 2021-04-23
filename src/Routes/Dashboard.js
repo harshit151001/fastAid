@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import { date } from 'yup';
-import EditableCard from '../Components/Cards/EditableCard';
-import ItemsList from '../Components/Lists/ItemsList';
-import { getItemsForUser, isAuthenticated } from '../Helper/Enpoints/Endpoints';
+import React, { useState, useEffect, useMemo } from "react";
+import { date } from "yup";
+import EditableCard from "../Components/Cards/EditableCard";
+import ItemsList from "../Components/Lists/ItemsList";
+import { getItemsForUser, isAuthenticated } from "../Helper/Enpoints/Endpoints";
 
 const Home = () => {
   const {
     user: { _id },
-    token
+    token,
   } = useMemo(() => isAuthenticated(), []);
 
   const [items, setItems] = useState([]);
@@ -25,21 +25,61 @@ const Home = () => {
   }, [_id, token]);
 
   const pushEmptyProduct = () => {
-    setItems(items => [...items, { id: Date.now(), companyName: '', city: '', name: '', contactNumber: '', stock: '', address: '', create: true }]);
+    setItems((items) => [
+      ...items,
+      {
+        id: Date.now(),
+        companyName: "",
+        city: "",
+        name: "",
+        contactNumber: "",
+        stock: "",
+        address: "",
+        create: true,
+      },
+    ]);
   };
 
   return (
     <div className="bg-light">
-      <div className="alert alert-success mt-0 mb-2 d-flex justify-content-between align-items-center" role="alert">
-        <button onClick={pushEmptyProduct} type="button" className="btn btn-success order-2">
+      <div
+        className="alert alert-success mt-0 mb-2 d-flex justify-content-between align-items-center"
+        role="alert"
+      >
+        <button
+          onClick={pushEmptyProduct}
+          type="button"
+          className="btn btn-success order-2"
+        >
           Add Product
         </button>
         <span className="lead order-1">No of products: {items.length}</span>
       </div>
       <ItemsList>
-        {items.map(({ name, stock, _id, contactNumber, address, companyName, city, create }) => (
-          <EditableCard name={name || ''} stock={stock || ''} key={_id} id={_id} city={city || ''} companyName={companyName || ''} address={address || ''} contactNumber={contactNumber || ''} create={create} />
-        ))}
+        {items.map(
+          ({
+            name,
+            stock,
+            _id,
+            contactNumber,
+            address,
+            companyName,
+            city,
+            create,
+          }) => (
+            <EditableCard
+              name={name || ""}
+              stock={stock || ""}
+              key={_id}
+              id={_id}
+              city={city || ""}
+              companyName={companyName || ""}
+              address={address || ""}
+              contactNumber={contactNumber || ""}
+              create={create}
+            />
+          )
+        )}
       </ItemsList>
     </div>
   );
