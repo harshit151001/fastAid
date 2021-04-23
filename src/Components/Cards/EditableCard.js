@@ -66,7 +66,8 @@ export function ourReducer(draft, action) {
   }
 }
 
-const Item = ({ name, id, companyName, city, contactNumber, stock, address }) => {
+const Item = ({ name, id, companyName, city, contactNumber, stock, address, create }) => {
+  console.log(create);
   const initialState = {
     city: {
       value: city.name || '',
@@ -110,8 +111,8 @@ const Item = ({ name, id, companyName, city, contactNumber, stock, address }) =>
   const [state, dispatch] = useImmerReducer(ourReducer, initialState);
 
   const updateProduct = () => {
-    if (!(disabled && id)) {
-      setDisabled(true);
+    if (!disabled) {
+      setDisabled(disabled => !disabled);
       console.log(state);
       const checkErr = [];
       for (const key in state) {
@@ -132,7 +133,7 @@ const Item = ({ name, id, companyName, city, contactNumber, stock, address }) =>
         fd.append(`user`, user._id);
         fd.append(`city`, '60825bf9e03e88eae79f5b75');
         fd.append(`stock`, stock.value);
-
+        console.log(create);
         Axios.post(`${process.env.REACT_APP_BACKEND}/product/create/${user._id}`, fd, config).then(
           response => {
             console.log(response);
@@ -146,7 +147,7 @@ const Item = ({ name, id, companyName, city, contactNumber, stock, address }) =>
       }
 
       // Make request
-    } else setDisabled(false);
+    } else setDisabled(disabled => !disabled);
   };
 
   return (
@@ -182,7 +183,7 @@ const Item = ({ name, id, companyName, city, contactNumber, stock, address }) =>
           </button>
           <div className="my-0">
             <button style={{ width: '90px' }} type="button" className="btn btn-success p-1 mt-2" onClick={updateProduct}>
-              {disabled && id ? 'Update' : 'Save'}
+              {disabled ? 'Update' : 'Save'}
             </button>
           </div>
         </div>

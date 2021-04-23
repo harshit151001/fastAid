@@ -25,7 +25,7 @@ const Home = () => {
   }, [_id, token]);
 
   const pushEmptyProduct = () => {
-    setItems(items => [...items, { _id: Date.now() }]);
+    setItems(items => [...items, { id: Date.now(), companyName: '', city: '', name: '', contactNumber: '', stock: '', address: '', create: true }]);
   };
 
   return (
@@ -37,8 +37,8 @@ const Home = () => {
         <span className="lead order-1">No of products: {items.length}</span>
       </div>
       <ItemsList>
-        {items.map(({ name, stock, _id, contactNumber, address, companyName, city }) => (
-          <EditableCard name={name || ''} stock={stock || ''} key={_id} id={_id || ''} city={city || ''} companyName={companyName || ''} address={address || ''} contactNumber={contactNumber || ''} />
+        {items.map(({ name, stock, _id, contactNumber, address, companyName, city, create }) => (
+          <EditableCard name={name || ''} stock={stock || ''} key={_id} id={_id} city={city || ''} companyName={companyName || ''} address={address || ''} contactNumber={contactNumber || ''} create={create} />
         ))}
       </ItemsList>
     </div>
