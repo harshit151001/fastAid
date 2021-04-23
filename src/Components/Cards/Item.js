@@ -7,7 +7,7 @@ const Item = ({ name, id, company, city, contact, quantity }) => {
         <div className="mb-0 d-flex justify-content-between align-items-center">
           <div className="h4 my-0 text-success">name</div>
           <div className="my-0">
-            <button type="button" class="btn btn-danger">
+            <button type="button" className="btn btn-danger">
               Report
             </button>
           </div>

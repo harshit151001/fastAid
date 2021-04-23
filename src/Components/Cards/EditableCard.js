@@ -8,27 +8,11 @@ const Item = ({ name, id, company, city, contact, quantity }) => {
           <div className="h4 my-0 text-success">
             <input type="text" placeholder="name" />
           </div>
-          <div className="my-0">
-            <button
-              style={{ width: "90px" }}
-              type="button"
-              class="btn btn-success p-1"
-            >
-              Update
-            </button>
-          </div>
         </div>
         <div className="mb-0 d-flex justify-content-between align-items-center">
           <div className="text-muted mb-0">
             <input type="text" placeholder="Company Name" />
           </div>
-          <button
-            style={{ width: "90px" }}
-            type="button"
-            class="btn btn-danger p-1"
-          >
-            Delete
-          </button>
         </div>
         <div className="mb-0">
           <strong>
@@ -43,6 +27,24 @@ const Item = ({ name, id, company, city, contact, quantity }) => {
         </div>
         <div className="mb-0">
           <input type="text" placeholder="Quantity" />
+        </div>
+        <div className="mb-0 d-flex justify-content-start align-items-center hid-on-large">
+          <button
+            style={{ width: "90px" }}
+            type="button"
+            className="btn btn-danger p-1 mt-2 me-2"
+          >
+            Delete
+          </button>
+          <div className="my-0">
+            <button
+              style={{ width: "90px" }}
+              type="button"
+              className="btn btn-success p-1 mt-2"
+            >
+              Update
+            </button>
+          </div>
         </div>
       </div>
     </div>
