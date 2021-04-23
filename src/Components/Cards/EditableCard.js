@@ -17,6 +17,12 @@ const Item = ({
         <div className="mb-0 d-flex justify-content-between align-items-center">
           <div className="h4 my-0 text-success">
             <input
+              style={{
+                minWidth: "300px",
+                outline: "none",
+                border: "none",
+                background: "transparent",
+              }}
               type="text"
               disabled={disabled}
               placeholder="name"
@@ -28,6 +34,12 @@ const Item = ({
         <div className="mb-0 d-flex justify-content-between align-items-center">
           <div className="text-muted mb-0">
             <input
+              style={{
+                minWidth: "300px",
+                outline: "none",
+                border: "none",
+                background: "transparent",
+              }}
               type="text"
               disabled={disabled}
               placeholder="Company Name"
@@ -38,6 +50,12 @@ const Item = ({
         <div className="mb-0">
           <strong>
             <input
+              style={{
+                minWidth: "300px",
+                outline: "none",
+                border: "none",
+                background: "transparent",
+              }}
               type="text"
               disabled={disabled}
               placeholder="City"
@@ -47,6 +65,12 @@ const Item = ({
         </div>
         <div className="mb-0">
           <input
+            style={{
+              minWidth: "300px",
+              outline: "none",
+              border: "none",
+              background: "transparent",
+            }}
             type="text"
             disabled={disabled}
             placeholder="Address"
@@ -55,6 +79,12 @@ const Item = ({
         </div>
         <div className="mb-0">
           <input
+            style={{
+              minWidth: "300px",
+              outline: "none",
+              border: "none",
+              background: "transparent",
+            }}
             type="text"
             disabled={disabled}
             placeholder="Contact No"
@@ -63,6 +93,12 @@ const Item = ({
         </div>
         <div className="mb-0">
           <input
+            style={{
+              minWidth: "300px",
+              outline: "none",
+              border: "none",
+              background: "transparent",
+            }}
             type="text"
             disabled={disabled}
             placeholder="Quantity"
