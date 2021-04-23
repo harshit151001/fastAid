@@ -134,14 +134,26 @@ const Item = ({ name, id, companyName, city, contactNumber, stock, address, crea
         fd.append(`city`, '60825bf9e03e88eae79f5b75');
         fd.append(`stock`, stock.value);
         console.log(create);
-        Axios.post(`${process.env.REACT_APP_BACKEND}/product/create/${user._id}`, fd, config).then(
-          response => {
-            console.log(response);
-          },
-          error => {
-            console.log(error);
-          }
-        );
+
+        if (create) {
+          Axios.post(`${process.env.REACT_APP_BACKEND}/product/create/${user._id}`, fd, config).then(
+            response => {
+              console.log(response);
+            },
+            error => {
+              console.log(error);
+            }
+          );
+        } else {
+          Axios.post(`${process.env.REACT_APP_BACKEND}/product/update/${id}/${user._id}`, fd, config).then(
+            response => {
+              console.log(response);
+            },
+            error => {
+              console.log(error);
+            }
+          );
+        }
       } else {
         console.log('Error in Validation');
       }
@@ -155,27 +167,27 @@ const Item = ({ name, id, companyName, city, contactNumber, stock, address, crea
       <div className="card shadow-sm rounded input-group p-2 px-3 my-2 card-special">
         <div className="mb-0 d-flex justify-content-between align-items-center">
           <div className="h4 my-0 text-success">
-            <input type="text" id="name" onChange={e => dispatch({ type: 'name', value: e.target.value })} disabled={disabled} placeholder="name" value={state.name.value} />
+            <input type="text" onChange={e => dispatch({ type: 'name', value: e.target.value })} disabled={disabled} placeholder="name" value={state.name.value} />
           </div>
         </div>
         <div className="mb-0 d-flex justify-content-between align-items-center">
           <div className="text-muted mb-0">
-            <input id="companyName" onChange={e => dispatch({ type: 'companyName', value: e.target.value })} type="text" disabled={disabled} placeholder="Company Name" value={state.companyName.value} />
+            <input onChange={e => dispatch({ type: 'companyName', value: e.target.value })} type="text" disabled={disabled} placeholder="Company Name" value={state.companyName.value} />
           </div>
         </div>
         <div className="mb-0">
           <strong>
-            <input id="city" onChange={e => dispatch({ type: 'city', value: e.target.value })} type="text" disabled={disabled} placeholder="City" value={state.city.value} />
+            <input onChange={e => dispatch({ type: 'city', value: e.target.value })} type="text" disabled={disabled} placeholder="City" value={state.city.value} />
           </strong>
         </div>
         <div className="mb-0">
-          <input id="address" onChange={e => dispatch({ type: 'address', value: e.target.value })} type="text" disabled={disabled} placeholder="Address" value={state.address.value} />
+          <input onChange={e => dispatch({ type: 'address', value: e.target.value })} type="text" disabled={disabled} placeholder="Address" value={state.address.value} />
         </div>
         <div className="mb-0">
-          <input type="text" id="contactNumber" onChange={e => dispatch({ type: 'contactNumber', value: e.target.value })} disabled={disabled} placeholder="Contact No" value={state.contactNumber.value} />
+          <input type="text" onChange={e => dispatch({ type: 'contactNumber', value: e.target.value })} disabled={disabled} placeholder="Contact No" value={state.contactNumber.value} />
         </div>
         <div className="mb-0">
-          <input type="text" id="stock" onChange={e => dispatch({ type: 'stock', value: e.target.value })} disabled={disabled} placeholder="Quantity" value={state.stock.value} />
+          <input type="text" onChange={e => dispatch({ type: 'stock', value: e.target.value })} disabled={disabled} placeholder="Quantity" value={state.stock.value} />
         </div>
         <div className="mb-0 d-flex justify-content-start align-items-center hid-on-large">
           <button style={{ width: '90px' }} type="button" className="btn btn-danger p-1 mt-2 me-2">
