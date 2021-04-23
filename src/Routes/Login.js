@@ -1,6 +1,7 @@
 import React from 'react';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
+import { login, authenticate } from '../Helper/Enpoints/Endpoints';
 
 const validationSchema = Yup.object({
   phoneNumber: Yup.string()
@@ -14,7 +15,7 @@ const validationSchema = Yup.object({
   password: Yup.string().min(6).required('Required')
 });
 
-const Login = () => {
+const Login = props => {
   const formik = useFormik({
     initialValues: {
       phoneNumber: '',
@@ -22,8 +23,15 @@ const Login = () => {
     },
     validationSchema,
     onSubmit: ({ phoneNumber, password }) => {
-      console.log(phoneNumber, password);
-      // action
+      login({ phoneNumber, password }).then(response => {
+        console.log(response);
+        authenticate(response, () => {
+          // blanck next function
+        });
+        return props.history.push({
+          pathname: '/'
+        });
+      });
     }
   });
 
