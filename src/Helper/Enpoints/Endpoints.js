@@ -17,10 +17,8 @@ export const login = async data => {
     },
     body: JSON.stringify(data)
   });
-  if (response.status === 200) {
-    const data = await response.json();
-    return data;
-  }
+
+  return await response.json();
 };
 
 export const authenticate = async (data, next) => {
@@ -34,7 +32,7 @@ export const isAutheticated = () => {
   if (typeof window == 'undefined') {
     return false;
   }
-  if (localStorage.getItem('FastAidjwt')) {
+  if (localStorage.getItem('Fastidjwt')) {
     return JSON.parse(localStorage.getItem('Upstorejwt'));
   } else {
     return false;

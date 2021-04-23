@@ -24,12 +24,15 @@ const Login = props => {
     validationSchema,
     onSubmit: ({ phoneNumber, password }) => {
       login({ phoneNumber, password }).then(response => {
-        console.log(response);
+        if (response.error) {
+          formik.setErrors({ phoneNumber: 'Mobile and password do not match' });
+          return;
+        }
         authenticate(response, () => {
           // blanck next function
         });
         return props.history.push({
-          pathname: '/'
+          pathname: '/dashboard'
         });
       });
     }
