@@ -32,7 +32,7 @@ export const isAutheticated = () => {
   if (typeof window == 'undefined') {
     return false;
   }
-  if (localStorage.getItem('Fastidjwt')) {
+  if (localStorage.getItem('FastAidjwt')) {
     return JSON.parse(localStorage.getItem('Upstorejwt'));
   } else {
     return false;
