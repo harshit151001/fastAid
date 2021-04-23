@@ -28,14 +28,29 @@ export const authenticate = async (data, next) => {
   }
 };
 
-export const isAutheticated = () => {
+export const isAuthenticated = () => {
   if (typeof window == 'undefined') {
     return false;
   }
   if (localStorage.getItem('FastAidjwt')) {
-    return JSON.parse(localStorage.getItem('Upstorejwt'));
+    return JSON.parse(localStorage.getItem('FastAidjwt'));
   } else {
     return false;
+  }
+};
+
+export const signout = async next => {
+  if (typeof window !== 'undefined') {
+    localStorage.removeItem('FastAidjwt');
+    next();
+    try {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND}/signout`, {
+        method: 'GET'
+      });
+      return console.log(response);
+    } catch (err) {
+      return console.log(err);
+    }
   }
 };
 
