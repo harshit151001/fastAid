@@ -24,7 +24,7 @@ const App = () => {
 
   return (
     <Router>
-      <Navbar cities={cities} setCity={setCity} />
+      <Navbar cities={cities} city={city} setCity={setCity} />
       <Switch>
         <Route exact path="/">
           <Home city={city} />

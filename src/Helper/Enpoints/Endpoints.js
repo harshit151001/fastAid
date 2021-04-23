@@ -11,7 +11,7 @@ export const getCities = async () => {
   }
 };
 
-const getItems = async (cityId) => {
+export const getItems = async (cityId) => {
   const response = await fetch(
     `${process.env.REACT_APP_BACKEND}/products/${cityId}`,
     {
@@ -20,11 +20,11 @@ const getItems = async (cityId) => {
   );
   if (response.status === 200) {
     const data = await response.json();
-    return data;
+    return data.products;
   }
 };
 
-const createItem = async (userId, token) => {
+export const createItem = async (userId, token) => {
   const response = await fetch(
     `${process.env.REACT_APP_BACKEND}/product/create/${userId}`,
     {
