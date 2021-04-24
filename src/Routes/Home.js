@@ -26,7 +26,7 @@ const Home = ({ match, history }) => {
       <div className="alert alert-success mt-0 mb-1 justify-content-between align-items-center" role="alert">
         <span className="lead order-1">Know some resources? </span>
         <Link to={{ pathname: '/login', state: { seller: 0 } }}>
-          <button>Voulenteer Here</button>
+          <button className="btn~success btn">Voulenteer Here</button>
         </Link>
       </div>
       <ItemsList>
