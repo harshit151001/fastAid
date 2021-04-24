@@ -167,7 +167,7 @@ const Item = ({ name, id, companyName, city, contactNumber, stock, address, crea
       <div className="card shadow-sm rounded input-group p-2 px-3 my-2 card-special">
         <div className="mb-0 d-flex justify-content-between align-items-center">
           <div className="h4 my-0 text-success">
-            <input type="text" onChange={e => dispatch({ type: 'name', value: e.target.value })} disabled={disabled} placeholder="name" value={state.name.value} />
+            <input type="text" onChange={e => dispatch({ type: 'name', value: e.target.value })} disabled={disabled} placeholder="Resource name" value={state.name.value} />
           </div>
         </div>
         <div className="mb-0 d-flex justify-content-between align-items-center">

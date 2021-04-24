@@ -13,7 +13,9 @@ const Navbar = ({ cities, setCity, city }) => {
     <nav className="navbar-dark bg-dark">
       <div className="container-fluid d-md-flex p-2 justify-content-between">
         <div className="d-flex justify-content-between">
-          <div className="navbar-brand order-0 text-success">FastAid</div>
+          <Link className="text-decoration-none" to="/">
+            <div className="navbar-brand order-0 text-success">FastAid</div>
+          </Link>
           <Link className="text-decoration-none" to={isAuthenticated() ? '/dashboard' : '/login'}>
             <button className="btn btn-outline-success d-md-none">{isAuthenticated() ? 'Dashboard' : 'Log in'}</button>
           </Link>
