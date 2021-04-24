@@ -46,6 +46,7 @@ const Home = ({ match, history }) => {
             companyName,
             city,
             user,
+            category,
           }) => (
             <Item
               name={name}
@@ -54,6 +55,7 @@ const Home = ({ match, history }) => {
               id={_id}
               city={city}
               user={user?.seller}
+              category={category}
               companyName={companyName}
               address={address}
               contactNumber={contactNumber}
