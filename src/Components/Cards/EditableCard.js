@@ -1,23 +1,12 @@
 /* eslint-disable default-case */
 import React, { useState } from 'react';
 import { useImmerReducer } from 'use-immer';
-import { isAuthenticated } from '../../Helper/Enpoints/Endpoints';
+import { deleteItem, isAuthenticated } from '../../Helper/Enpoints/Endpoints';
 import Select from 'react-select';
 import Axios from 'axios';
 
 export function ourReducer(draft, action) {
   switch (action.type) {
-    case 'name':
-      draft.name.value = action.value;
-
-      if (action.value.length) {
-        draft.name.hasErrors = false;
-      } else {
-        draft.name.hasErrors = true;
-        draft.name.message = 'required';
-      }
-      return;
-
     case 'contactNumber':
       draft.contactNumber.value = action.value;
       if (action.value.length) {
@@ -62,10 +51,10 @@ export function ourReducer(draft, action) {
   }
 }
 
-const Item = ({ zIndex, name, id, companyName, city, contactNumber, stock, address, create, cities, categories }) => {
+const Item = ({ zIndex, name, id, companyName, city, contactNumber, stock, address, create, cities, categories, category, setItems }) => {
   const cityOptions = [...cities];
   const resourceOptions = [...categories];
-  // const nameOptions = []
+
   const initialState = {
     companyName: {
       value: companyName,
@@ -74,11 +63,6 @@ const Item = ({ zIndex, name, id, companyName, city, contactNumber, stock, addre
     },
     contactNumber: {
       value: contactNumber,
-      hasErrors: false,
-      message: ''
-    },
-    name: {
-      value: name,
       hasErrors: false,
       message: ''
     },
@@ -95,9 +79,10 @@ const Item = ({ zIndex, name, id, companyName, city, contactNumber, stock, addre
       message: ''
     }
   };
+
   const [disabled, setDisabled] = useState(true);
   const [selectedCity, setSelectedCity] = useState(city);
-  const [selectedResource, setSelectedResource] = useState(name);
+  const [selectedResource, setSelectedResource] = useState(category);
 
   console.log('City :', city);
 
@@ -240,7 +225,16 @@ const Item = ({ zIndex, name, id, companyName, city, contactNumber, stock, addre
           />
         </div>
         <div className="mb-0 d-flex justify-content-start align-items-center hid-on-large">
-          <button style={{ width: '90px' }} type="button" className="btn btn-danger p-1 mt-2 me-2">
+          <button
+            style={{ width: '90px' }}
+            type="button"
+            className="btn btn-danger p-1 mt-2 me-2"
+            onClick={() => {
+              if (deleteItem(user._id, id, token)) {
+                setItems(prevItems => prevItems.filter(({ _id }) => _id !== id));
+              }
+            }}
+          >
             Delete
           </button>
           <div className="my-0">

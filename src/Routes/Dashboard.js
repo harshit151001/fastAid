@@ -51,8 +51,8 @@ const Dashboard = ({ cities, categories }) => {
         <span className="lead order-1">No of products: {items.length}</span>
       </div>
       <ItemsList>
-        {items.map(({ name, stock, _id, contactNumber, address, companyName, city, create }, index) => (
-          <EditableCard zIndex={zIndex - index} name={name || ''} stock={stock || ''} key={_id} id={_id} city={city || ''} companyName={companyName || ''} address={address || ''} contactNumber={contactNumber || ''} create={create} cities={cities} categories={categories} />
+        {items.map(({ name, stock, _id, contactNumber, address, companyName, city, create, category }, index) => (
+          <EditableCard zIndex={zIndex - index} name={name || ''} stock={stock || ''} key={_id} id={_id} city={city || ''} companyName={companyName || ''} address={address || ''} contactNumber={contactNumber || ''} setItems={setItems} create={create} cities={cities} categories={categories} category={category} />
         ))}
       </ItemsList>
     </div>
