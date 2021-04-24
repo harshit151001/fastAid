@@ -6,7 +6,7 @@ const Footer = () => {
       <div className="text-success text-center fs-5 pb-1">
         Created by team at FastDev.
       </div>
-      <div className="p-0 m-0 d-flex align-items-center justify-content-center fs-6">
+      <div className="p-0 m-0 flex-column flex-md-row d-flex align-items-center justify-content-center fs-6">
         <a
           className="text-success mx-2 text-decoration-none"
           href="https://www.linkedin.com/in/abhijit-kumar-983546170/"

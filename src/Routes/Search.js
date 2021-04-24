@@ -58,7 +58,9 @@ const Search = (props) => {
           disabled={page === 1}
           onClick={() =>
             props.history.push(
-              `/search/${cityId}/${searchQuery}/${page > 1 ? page - 1 : page}`
+              `/search/${cityId}/${searchQuery}/${
+                +page > 1 ? +page - 1 : +page
+              }`
             )
           }
           className="btn btn-success mx-2"
@@ -67,7 +69,7 @@ const Search = (props) => {
         </button>
         <button
           onClick={() =>
-            props.history.push(`/search/${cityId}/${searchQuery}/${page + 1}`)
+            props.history.push(`/search/${cityId}/${searchQuery}/${+page + 1}`)
           }
           className="btn btn-success mx-2"
         >
