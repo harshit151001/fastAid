@@ -53,7 +53,7 @@ const Dashboard = ({ cities }) => {
           type="button"
           className="btn btn-success order-2"
         >
-          Add Product
+          Add Resource
         </button>
         <span className="lead order-1">No of products: {items.length}</span>
       </div>

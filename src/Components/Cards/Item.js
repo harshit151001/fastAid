@@ -20,14 +20,14 @@ const Item = ({
             </button>
           </div>
         </div>
-        <div className="text-muted mb-0">{companyName}</div>
+        <div className="text-muted mb-0">{companyName || ""}</div>
         <div className="mb-0 lead">
           <strong>{city.name}</strong>
         </div>
-        <div className="mb-0 ">{address}</div>
-        <div className="mb-0 ">Contact Information: {contactNumber}</div>
+        <div className="mb-0 ">{address || ""}</div>
+        <div className="mb-0 ">Contact Information: {contactNumber || ""}</div>
         <div className="mb-0 text-success lead">
-          <strong>{stock} Available</strong>
+          <strong>{stock ? `${stock} Available` : ""}</strong>
         </div>
       </div>
     </div>

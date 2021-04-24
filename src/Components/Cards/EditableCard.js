@@ -5,6 +5,18 @@ import { isAuthenticated } from "../../Helper/Enpoints/Endpoints";
 import Select from "react-select";
 import Axios from "axios";
 
+const resourceOptions = [
+  "Oxygen cylinders",
+  "Remdesvir",
+  "Tocilizumab",
+  "Hospital beds",
+  "Vaccines",
+  "Groceries",
+  "Medicines",
+  "Plasma",
+  "Doctors",
+];
+
 export function ourReducer(draft, action) {
   switch (action.type) {
     case "name":
@@ -107,10 +119,16 @@ const Item = ({
   };
   const [disabled, setDisabled] = useState(true);
   const [selectedCity, setSelectedCity] = useState(city);
-  const [currentCity, setCurrentCity] = useState(null);
+  const [resourceName, setResourceName] = useState(name);
+
+  console.log("Resource :", resourceName);
+  console.log("City :", city);
+
   const onchangeSelect = (item) => {
-    setCurrentCity(null);
     setSelectedCity(item);
+  };
+  const changeResourceName = (item) => {
+    setResourceName(item);
   };
 
   const { token, user } = isAuthenticated();
@@ -127,15 +145,14 @@ const Item = ({
       for (const key in state) {
         if (state[key].hasErrors) {
           checkErr.push(1);
-
           dispatch({ type: key, value: "" });
         }
       }
       if (!checkErr.length) {
-        const { name, companyName, address, contactNumber, stock } = state;
+        const { companyName, address, contactNumber, stock } = state;
         const fd = new FormData();
 
-        fd.append(`name`, name.value);
+        fd.append(`name`, resourceName);
         fd.append(`companyName`, companyName.value);
         fd.append(`address`, address.value);
         fd.append(`contactNumber`, contactNumber.value);
@@ -179,23 +196,15 @@ const Item = ({
   return (
     <div style={{ zIndex }} className="col-md col-md-6">
       <div className="card shadow-sm rounded input-group p-2 px-3 my-2 card-special">
-        <div className="mb-0 d-flex justify-content-between align-items-center">
-          <div className="h4 my-0 text-success">
-            <input
-              className="focus-border"
-              style={{
-                minWidth: "300px",
-                outline: "none",
-                background: "transparent",
-                border: "none",
-              }}
-              type="text"
-              onChange={(e) =>
-                dispatch({ type: "name", value: e.target.value })
-              }
-              disabled={disabled}
-              placeholder="name"
-              value={state.name.value}
+        <div style={{ zIndex: 10002 }} className="mb-0">
+          <div className="my-0 text-success">
+            <Select
+              value={resourceName}
+              onChange={changeResourceName}
+              options={resourceOptions}
+              isDisabled={disabled}
+              getOptionValue={(option) => option.name}
+              getOptionLabel={(option) => option.name}
             />
           </div>
         </div>
@@ -224,6 +233,7 @@ const Item = ({
             value={selectedCity}
             onChange={onchangeSelect}
             options={cityOptions}
+            isDisabled={disabled}
             getOptionValue={(option) => option.name}
             getOptionLabel={(option) => option.name}
           />
