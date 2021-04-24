@@ -4,6 +4,8 @@ import EditableCard from "../Components/Cards/EditableCard";
 import ItemsList from "../Components/Lists/ItemsList";
 import { getItemsForUser, isAuthenticated } from "../Helper/Enpoints/Endpoints";
 
+const zIndex = 100000;
+
 const Dashboard = ({ cities }) => {
   const {
     user: { _id },
@@ -57,17 +59,21 @@ const Dashboard = ({ cities }) => {
       </div>
       <ItemsList>
         {items.map(
-          ({
-            name,
-            stock,
-            _id,
-            contactNumber,
-            address,
-            companyName,
-            city,
-            create,
-          }) => (
+          (
+            {
+              name,
+              stock,
+              _id,
+              contactNumber,
+              address,
+              companyName,
+              city,
+              create,
+            },
+            index
+          ) => (
             <EditableCard
+              zIndex={zIndex - index}
               name={name || ""}
               stock={stock || ""}
               key={_id}
