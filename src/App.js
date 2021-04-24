@@ -44,9 +44,9 @@ const App = () => {
       />
       <Switch>
         <Route exact path="/">
-          <Redirect to={`/home/60825bf9e03e88eae79f5b75`} />
+          <Redirect to={`/home/60825bf9e03e88eae79f5b75/1`} />
         </Route>
-        <Route exact path="/home/:cityId">
+        <Route exact path="/home/:cityId/:page">
           <Home city={city} />
         </Route>
         <Route exact path="/search/:cityId/:searchQuery/:page">

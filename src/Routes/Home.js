@@ -2,22 +2,24 @@ import React, { useState, useEffect } from "react";
 import Item from "../Components/Cards/Item";
 import ItemsList from "../Components/Lists/ItemsList";
 import { getItems } from "../Helper/Enpoints/Endpoints";
+import { withRouter } from "react-router-dom";
 
-const Home = ({ city }) => {
-  const [page, setPage] = useState(1);
+const Home = ({ match, history }) => {
   const [items, setItems] = useState([]);
+  const { cityId, page } = match.params;
+  console.log(cityId, page);
 
   useEffect(() => {
     let mounted = true;
     if (mounted) {
       const getAndSetItems = async () => {
-        const response = await getItems(page, city);
+        const response = await getItems(page, cityId);
         setItems(response);
       };
       getAndSetItems();
     }
     return () => (mounted = false);
-  }, [city, page]);
+  }, [cityId, page]);
 
   return (
     <div style={{ background: "#fafafa" }}>
@@ -46,13 +48,15 @@ const Home = ({ city }) => {
       <div className="d-flex align-items-center justify-content-center p-4">
         <button
           disabled={page === 1}
-          onClick={() => setPage((page) => (page > 1 ? page - 1 : page))}
+          onClick={() =>
+            history.push(`/home/${cityId}/${+page > 1 ? +page - 1 : +page}`)
+          }
           className="btn btn-success mx-2"
         >
           Back
         </button>
         <button
-          onClick={() => setPage((page) => page + 1)}
+          onClick={() => history.push(`/home/${cityId}/${+page + 1}`)}
           className="btn btn-success mx-2"
         >
           Next
@@ -62,4 +66,4 @@ const Home = ({ city }) => {
   );
 };
 
-export default Home;
+export default withRouter(Home);
