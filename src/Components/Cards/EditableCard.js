@@ -79,8 +79,10 @@ const Item = ({
   stock,
   address,
   create,
+  cities,
 }) => {
-  console.log(create);
+  console.log("cities", cities);
+
   const initialState = {
     city: {
       value: city.name || "",
@@ -116,7 +118,7 @@ const Item = ({
     },
   };
   const [disabled, setDisabled] = useState(true);
-  const [errors, setErrors] = useState(0);
+
   const { token, user } = isAuthenticated();
   const config = {
     headers: { Authorization: `Bearer ${token}` },
@@ -145,15 +147,15 @@ const Item = ({
           stock,
         } = state;
         const fd = new FormData();
+        console.log("city:", city.value);
 
         fd.append(`name`, name.value);
         fd.append(`companyName`, companyName.value);
         fd.append(`address`, address.value);
         fd.append(`contactNumber`, contactNumber.value);
         fd.append(`user`, user._id);
-        fd.append(`city`, "60825bf9e03e88eae79f5b75");
+        fd.append(`city`, city.value);
         fd.append(`stock`, stock.value);
-        console.log(create);
 
         if (create) {
           Axios.post(
@@ -185,8 +187,6 @@ const Item = ({
       } else {
         console.log("Error in Validation");
       }
-
-      // Make request
     } else setDisabled((disabled) => !disabled);
   };
 
@@ -196,6 +196,7 @@ const Item = ({
         <div className="mb-0 d-flex justify-content-between align-items-center">
           <div className="h4 my-0 text-success">
             <input
+              className="focus-border"
               style={{
                 minWidth: "300px",
                 outline: "none",
@@ -215,6 +216,7 @@ const Item = ({
         <div className="mb-0 d-flex justify-content-between align-items-center">
           <div className="text-muted mb-0">
             <input
+              className="focus-border"
               style={{
                 minWidth: "300px",
                 outline: "none",
@@ -233,7 +235,8 @@ const Item = ({
         </div>
         <div className="mb-0">
           <strong>
-            <input
+            {/* <input
+              className="focus-border"
               style={{
                 minWidth: "300px",
                 outline: "none",
@@ -247,11 +250,39 @@ const Item = ({
               disabled={disabled}
               placeholder="City"
               value={state.city.value}
+            /> */}
+            <input
+              className="focus-border"
+              style={{
+                minWidth: "300px",
+                outline: "none",
+                background: "transparent",
+                border: "none",
+              }}
+              type="text"
+              disabled={disabled}
+              placeholder="City"
+              aria-label="City"
+              name="cities"
+              list="cities"
+              value={state.city.value}
+              onChange={(e) =>
+                dispatch({
+                  type: "city",
+                  value: e.target.value,
+                })
+              }
             />
+            <datalist id="cities">
+              {cities.map(({ name, _id }) => (
+                <option key={_id}>{name}</option>
+              ))}
+            </datalist>
           </strong>
         </div>
         <div className="mb-0">
           <input
+            className="focus-border"
             style={{
               minWidth: "300px",
               outline: "none",
@@ -269,6 +300,7 @@ const Item = ({
         </div>
         <div className="mb-0">
           <input
+            className="focus-border"
             style={{
               minWidth: "300px",
               outline: "none",
@@ -286,6 +318,7 @@ const Item = ({
         </div>
         <div className="mb-0">
           <input
+            className="focus-border"
             style={{
               minWidth: "300px",
               outline: "none",

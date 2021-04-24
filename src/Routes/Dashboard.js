@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { date } from "yup";
+// import { date } from "yup";
 import EditableCard from "../Components/Cards/EditableCard";
 import ItemsList from "../Components/Lists/ItemsList";
 import { getItemsForUser, isAuthenticated } from "../Helper/Enpoints/Endpoints";
 
-const Home = () => {
+const Dashboard = ({ cities }) => {
   const {
     user: { _id },
     token,
@@ -41,7 +41,7 @@ const Home = () => {
   };
 
   return (
-    <div className="bg-light">
+    <div style={{ background: "#fafafa" }} className="bg-light">
       <div
         className="alert alert-success mt-0 mb-2 d-flex justify-content-between align-items-center"
         role="alert"
@@ -77,6 +77,7 @@ const Home = () => {
               address={address || ""}
               contactNumber={contactNumber || ""}
               create={create}
+              cities={cities}
             />
           )
         )}
@@ -85,4 +86,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Dashboard;

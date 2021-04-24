@@ -19,9 +19,9 @@ const Home = ({ city }) => {
   }, [city]);
 
   return (
-    <div className="bg-light">
+    <div style={{ background: "#fafafa" }}>
       <div
-        className="alert alert-success mt-0 mb-2 d-flex justify-content-between align-items-center"
+        className="alert alert-success mt-0 mb-1 d-flex justify-content-between align-items-center"
         role="alert"
       >
         <span className="lead order-1">Please login to add resources</span>

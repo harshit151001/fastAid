@@ -5,6 +5,7 @@ import Home from "./Routes/Home";
 import Login from "./Routes/Login";
 import Dashboard from "./Routes/Dashboard";
 import { getCities } from "./Helper/Enpoints/Endpoints";
+import PrivateRoute from "./Helper/Auth/Privateroute";
 
 const App = () => {
   const [city, setCity] = useState("60825bf9e03e88eae79f5b75");
@@ -30,10 +31,22 @@ const App = () => {
           <Home city={city} />
         </Route>
         <Route exact path="/login" component={Login} />
-        <Route exact path="/dashboard/" component={Dashboard} />
+        <PrivateRoute exact path="/dashboard">
+          <Dashboard cities={cities} />
+        </PrivateRoute>
       </Switch>
     </Router>
   );
 };
 
 export default App;
+
+// option=>data list ( for cities )
+// Home screen: List of cities ( in cards )
+// Change text Please login to add resources => Have any supplier info? button
+// Differentiate b/w supplier and general public
+// Populate db
+// Logo
+// Cards eliviation and background
+// Beside search add category selector ( fixed initial categories )
+// Hospital beds link :gimic
