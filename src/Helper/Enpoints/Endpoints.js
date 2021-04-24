@@ -56,9 +56,21 @@ export const signout = async (next) => {
   }
 };
 
-export const getItems = async (cityId) => {
+export const getItems = async (page, cityId) => {
   const response = await fetch(
-    `${process.env.REACT_APP_BACKEND}/products/${cityId}`,
+    `${process.env.REACT_APP_BACKEND}/products/${cityId}?page=${page}`,
+    {
+      method: "GET",
+    }
+  );
+  if (response.status === 200) {
+    const data = await response.json();
+    return data.products;
+  }
+};
+export const getItemsFromQuery = async (page, cityId, searchQuery) => {
+  const response = await fetch(
+    `${process.env.REACT_APP_BACKEND}/search/products/${cityId}?page=${page}&&search=${searchQuery}`,
     {
       method: "GET",
     }

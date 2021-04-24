@@ -1,14 +1,42 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { isAuthenticated } from "../../Helper/Enpoints/Endpoints";
+import { Link, withRouter } from "react-router-dom";
+import {
+  getItemsFromQuery,
+  isAuthenticated,
+} from "../../Helper/Enpoints/Endpoints";
 
-const Navbar = ({ cities, setCity, city }) => {
+const Navbar = ({
+  cities,
+  setCity,
+  city,
+  searchQuery,
+  setSearchQuery,
+  history,
+  location,
+  match,
+  setSearchedItems,
+}) => {
+  const { pathname } = location;
+
   const handleChange = (e) => {
     for (let city of cities) {
       if (city.name === e.target.value) {
+        const newPath = pathname.split("/");
+        newPath[2] = city._id;
         setCity(city._id);
+        history.push(newPath.join("/"));
       }
     }
+  };
+
+  const redirectToSearch = (e) => {
+    e.preventDefault();
+    const getAndSetItems = async () => {
+      const response = await getItemsFromQuery(1, city, searchQuery);
+      setSearchedItems(response);
+    };
+    getAndSetItems();
+    history.push(`/search/${city}/${searchQuery}/${1}`);
   };
 
   return (
@@ -30,7 +58,10 @@ const Navbar = ({ cities, setCity, city }) => {
           </Link>
         </div>
         <div className="d-md-flex">
-          <form className="d-flex mx-md-2 mt-2 mt-md-0">
+          <form
+            onSubmit={(e) => e.preventDefault()}
+            className="d-flex mx-md-2 mt-2 mt-md-0"
+          >
             <input
               className="form-control me-2"
               type="search"
@@ -46,12 +77,17 @@ const Navbar = ({ cities, setCity, city }) => {
               ))}
             </datalist>
           </form>
-          <form className="d-flex mx-md-2 mt-2 mt-md-0">
+          <form
+            onSubmit={redirectToSearch}
+            className="d-flex mx-md-2 mt-2 mt-md-0"
+          >
             <input
               className="form-control me-2"
               type="search"
               placeholder="Search"
               aria-label="Search"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
             />
             <button className="btn btn-outline-success" type="submit">
               Search
@@ -71,4 +107,4 @@ const Navbar = ({ cities, setCity, city }) => {
   );
 };
 
-export default Navbar;
+export default withRouter(Navbar);
