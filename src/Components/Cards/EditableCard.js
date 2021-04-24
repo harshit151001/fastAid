@@ -46,15 +46,6 @@ export function ourReducer(draft, action) {
         draft.address.message = 'required';
       }
       return;
-    // case 'city':
-    //   draft.city.value = action.value;
-    //   if (action.value.length) {
-    //     draft.city.hasErrors = false;
-    //   } else {
-    //     draft.city.hasErrors = true;
-    //     draft.city.message = 'required';
-    //   }
-    //   return;
 
     case 'stock':
       draft.stock.value = action.value;
@@ -73,13 +64,8 @@ export function ourReducer(draft, action) {
 
 const Item = ({ name, id, companyName, city, contactNumber, stock, address, create, cities }) => {
   const cityOptions = [...cities];
-
+  // const nameOptions = []
   const initialState = {
-    // city: {
-    //   value: city.name || '',
-    //   hasErrors: false,
-    //   message: ''
-    // },
     companyName: {
       value: companyName,
       hasErrors: false,
@@ -211,51 +197,6 @@ const Item = ({ name, id, companyName, city, contactNumber, stock, address, crea
           </div>
         </div>
         <div className="mb-0">
-          {/* <strong>
-            <input
-              className="focus-border"
-              style={{
-                minWidth: "300px",
-                outline: "none",
-                background: "transparent",
-                border: "none",
-              }}
-              onChange={(e) =>
-                dispatch({ type: "city", value: e.target.value })
-              }
-              type="text"
-              disabled={disabled}
-              placeholder="City"
-              value={state.city.value}
-            />
-            <input
-              className="focus-border"
-              style={{
-                minWidth: '300px',
-                outline: 'none',
-                background: 'transparent',
-                border: 'none'
-              }}
-              type="text"
-              disabled={disabled}
-              placeholder="City"
-              aria-label="City"
-              name="cities"
-              list="cities"
-              value={state.city.value}
-              onChange={e =>
-                dispatch({
-                  type: 'city',
-                  value: e.target.value
-                })
-              }
-            />
-            <datalist id="cities">
-              {cities.map(({ name, _id }) => (
-                <option key={_id}>{name}</option>
-              ))}
-            </datalist>
-          </strong> */}
           <Select value={selectedCity} onChange={onchangeSelect} options={cityOptions} getOptionValue={option => option.name} getOptionLabel={option => option.name} />
         </div>
         <div className="mb-0">
