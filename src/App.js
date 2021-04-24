@@ -6,7 +6,7 @@ import HelpPeople from './HelpPeople';
 import Home from './Routes/Home';
 import Login from './Routes/Login';
 import Dashboard from './Routes/Dashboard';
-import { getCities } from './Helper/Enpoints/Endpoints';
+import { getCities, getCategories } from './Helper/Enpoints/Endpoints';
 import PrivateRoute from './Helper/Auth/Privateroute';
 import Footer from './Components/Footer/Footer';
 import Search from './Routes/Search';
@@ -14,17 +14,20 @@ import Search from './Routes/Search';
 const App = () => {
   const [city, setCity] = useState('60825bf9e03e88eae79f5b75');
   const [cities, setCities] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchedItems, setSearchedItems] = useState([]);
 
   useEffect(() => {
     let mounted = true;
     if (mounted) {
-      const getAndSetCities = async () => {
-        const response = await getCities();
-        setCities(response);
+      const citiesAndCategories = async () => {
+        const responseCities = await getCities();
+        const responseCategories = await getCategories();
+        setCities(responseCities);
+        setCategories(responseCategories);
       };
-      getAndSetCities();
+      citiesAndCategories();
     }
     return () => (mounted = false);
   }, []);
@@ -50,7 +53,7 @@ const App = () => {
         </Route>
         <Route exact path="/login" component={Login} />
         <PrivateRoute exact path="/dashboard">
-          <Dashboard cities={cities} />
+          <Dashboard categories={categories} cities={cities} />
         </PrivateRoute>
       </Switch>
       <Footer />
