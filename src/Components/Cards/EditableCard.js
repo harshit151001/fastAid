@@ -1,67 +1,59 @@
 /* eslint-disable default-case */
-import React, { useState } from "react";
-import { useImmerReducer } from "use-immer";
-import { isAuthenticated } from "../../Helper/Enpoints/Endpoints";
-import Axios from "axios";
+import React, { useState } from 'react';
+import { useImmerReducer } from 'use-immer';
+import { isAuthenticated } from '../../Helper/Enpoints/Endpoints';
+import Select from 'react-select';
+import Axios from 'axios';
 
 export function ourReducer(draft, action) {
   switch (action.type) {
-    case "name":
+    case 'name':
       draft.name.value = action.value;
 
       if (action.value.length) {
         draft.name.hasErrors = false;
       } else {
         draft.name.hasErrors = true;
-        draft.name.message = "required";
+        draft.name.message = 'required';
       }
       return;
 
-    case "contactNumber":
+    case 'contactNumber':
       draft.contactNumber.value = action.value;
       if (action.value.length) {
         draft.contactNumber.hasErrors = false;
       } else {
         draft.contactNumber.hasErrors = true;
-        draft.contactNumber.message = "required";
+        draft.contactNumber.message = 'required';
       }
       return;
-    case "companyName":
+    case 'companyName':
       draft.companyName.value = action.value;
       if (action.value.length) {
         draft.companyName.hasErrors = false;
       } else {
         draft.companyName.hasErrors = true;
-        draft.companyName.message = "required";
+        draft.companyName.message = 'required';
       }
       return;
 
-    case "address":
+    case 'address':
       draft.address.value = action.value;
       if (action.value.length) {
         draft.address.hasErrors = false;
       } else {
         draft.address.hasErrors = true;
-        draft.address.message = "required";
-      }
-      return;
-    case "city":
-      draft.city.value = action.value;
-      if (action.value.length) {
-        draft.city.hasErrors = false;
-      } else {
-        draft.city.hasErrors = true;
-        draft.city.message = "required";
+        draft.address.message = 'required';
       }
       return;
 
-    case "stock":
+    case 'stock':
       draft.stock.value = action.value;
       if (action.value.length) {
         draft.stock.hasErrors = false;
       } else {
         draft.stock.hasErrors = true;
-        draft.stock.message = "required";
+        draft.stock.message = 'required';
       }
       return;
 
@@ -70,124 +62,100 @@ export function ourReducer(draft, action) {
   }
 }
 
-const Item = ({
-  name,
-  id,
-  companyName,
-  city,
-  contactNumber,
-  stock,
-  address,
-  create,
-  cities,
-}) => {
-  console.log("cities", cities);
+const Item = ({ name, id, companyName, city, contactNumber, stock, address, create, cities }) => {
+  const cityOptions = [...cities];
 
   const initialState = {
-    city: {
-      value: city.name || "",
-      hasErrors: false,
-      message: "",
-    },
     companyName: {
       value: companyName,
       hasErrors: false,
-      message: "",
+      message: ''
     },
     contactNumber: {
       value: contactNumber,
       hasErrors: false,
-      message: "",
+      message: ''
     },
     name: {
       value: name,
       hasErrors: false,
-      message: "",
+      message: ''
     },
 
     address: {
       value: address,
       hasErrors: false,
-      message: "",
+      message: ''
     },
 
     stock: {
       value: stock,
       hasErrors: false,
-      message: "",
-    },
+      message: ''
+    }
   };
   const [disabled, setDisabled] = useState(true);
-
+  const [selectedCity, setSelectedCity] = useState(city);
+  const [currentCity, setCurrentCity] = useState(null);
+  const onchangeSelect = item => {
+    setCurrentCity(null);
+    setSelectedCity(item);
+  };
   const { token, user } = isAuthenticated();
   const config = {
-    headers: { Authorization: `Bearer ${token}` },
+    headers: { Authorization: `Bearer ${token}` }
   };
   const [state, dispatch] = useImmerReducer(ourReducer, initialState);
 
   const updateProduct = () => {
     if (!disabled) {
-      setDisabled((disabled) => !disabled);
+      setDisabled(disabled => !disabled);
       console.log(state);
       const checkErr = [];
       for (const key in state) {
         if (state[key].hasErrors) {
           checkErr.push(1);
 
-          dispatch({ type: key, value: "" });
+          dispatch({ type: key, value: '' });
         }
       }
       if (!checkErr.length) {
-        const {
-          name,
-          companyName,
-          city,
-          address,
-          contactNumber,
-          stock,
-        } = state;
+        const { name, companyName, address, contactNumber, stock } = state;
         const fd = new FormData();
-        console.log("city:", city.value);
+
+        console.log('city:', city.value);
 
         fd.append(`name`, name.value);
         fd.append(`companyName`, companyName.value);
         fd.append(`address`, address.value);
         fd.append(`contactNumber`, contactNumber.value);
         fd.append(`user`, user._id);
-        fd.append(`city`, city.value);
+        fd.append(`city`, selectedCity._id);
         fd.append(`stock`, stock.value);
 
         if (create) {
-          Axios.post(
-            `${process.env.REACT_APP_BACKEND}/product/create/${user._id}`,
-            fd,
-            config
-          ).then(
-            (response) => {
+          Axios.post(`${process.env.REACT_APP_BACKEND}/product/create/${user._id}`, fd, config).then(
+            response => {
               console.log(response);
             },
-            (error) => {
+            error => {
               console.log(error);
             }
           );
         } else {
-          Axios.put(
-            `${process.env.REACT_APP_BACKEND}/product/update/${id}/${user._id}`,
-            fd,
-            config
-          ).then(
-            (response) => {
+          Axios.put(`${process.env.REACT_APP_BACKEND}/product/update/${id}/${user._id}`, fd, config).then(
+            response => {
               console.log(response);
             },
-            (error) => {
+            error => {
               console.log(error);
             }
           );
         }
       } else {
-        console.log("Error in Validation");
+        console.log('Error in Validation');
       }
-    } else setDisabled((disabled) => !disabled);
+    } else setDisabled(disabled => !disabled);
   };
 
   return (
@@ -198,15 +166,13 @@ const Item = ({
             <input
               className="focus-border"
               style={{
-                minWidth: "300px",
-                outline: "none",
-                background: "transparent",
-                border: "none",
+                minWidth: '300px',
+                outline: 'none',
+                background: 'transparent',
+                border: 'none'
               }}
               type="text"
-              onChange={(e) =>
-                dispatch({ type: "name", value: e.target.value })
-              }
+              onChange={e => dispatch({ type: 'name', value: e.target.value })}
               disabled={disabled}
               placeholder="name"
               value={state.name.value}
@@ -218,14 +184,12 @@ const Item = ({
             <input
               className="focus-border"
               style={{
-                minWidth: "300px",
-                outline: "none",
-                background: "transparent",
-                border: "none",
+                minWidth: '300px',
+                outline: 'none',
+                background: 'transparent',
+                border: 'none'
               }}
-              onChange={(e) =>
-                dispatch({ type: "companyName", value: e.target.value })
-              }
+              onChange={e => dispatch({ type: 'companyName', value: e.target.value })}
               type="text"
               disabled={disabled}
               placeholder="Company Name"
@@ -234,8 +198,8 @@ const Item = ({
           </div>
         </div>
         <div className="mb-0">
-          <strong>
-            {/* <input
+          {/* <strong> */}
+          {/* <input
               className="focus-border"
               style={{
                 minWidth: "300px",
@@ -251,13 +215,14 @@ const Item = ({
               placeholder="City"
               value={state.city.value}
             /> */}
-            <input
+
+          {/* <input
               className="focus-border"
               style={{
-                minWidth: "300px",
-                outline: "none",
-                background: "transparent",
-                border: "none",
+                minWidth: '300px',
+                outline: 'none',
+                background: 'transparent',
+                border: 'none'
               }}
               type="text"
               disabled={disabled}
@@ -266,32 +231,34 @@ const Item = ({
               name="cities"
               list="cities"
               value={state.city.value}
-              onChange={(e) =>
+              onChange={e => {
+                console.log(e);
                 dispatch({
-                  type: "city",
-                  value: e.target.value,
-                })
-              }
+                  type: 'city',
+                  value: e.target.value
+                });
+              }}
             />
             <datalist id="cities">
               {cities.map(({ name, _id }) => (
                 <option key={_id}>{name}</option>
               ))}
-            </datalist>
-          </strong>
+            
+            </datalist> */}
+          {console.log(selectedCity)}
+          <Select value={selectedCity} onChange={onchangeSelect} options={cityOptions} getOptionValue={option => option.name} getOptionLabel={option => option.name} />
+          {/* </strong> */}
         </div>
         <div className="mb-0">
           <input
             className="focus-border"
             style={{
-              minWidth: "300px",
-              outline: "none",
-              background: "transparent",
-              border: "none",
+              minWidth: '300px',
+              outline: 'none',
+              background: 'transparent',
+              border: 'none'
             }}
-            onChange={(e) =>
-              dispatch({ type: "address", value: e.target.value })
-            }
+            onChange={e => dispatch({ type: 'address', value: e.target.value })}
             type="text"
             disabled={disabled}
             placeholder="Address"
@@ -302,15 +269,13 @@ const Item = ({
           <input
             className="focus-border"
             style={{
-              minWidth: "300px",
-              outline: "none",
-              background: "transparent",
-              border: "none",
+              minWidth: '300px',
+              outline: 'none',
+              background: 'transparent',
+              border: 'none'
             }}
             type="text"
-            onChange={(e) =>
-              dispatch({ type: "contactNumber", value: e.target.value })
-            }
+            onChange={e => dispatch({ type: 'contactNumber', value: e.target.value })}
             disabled={disabled}
             placeholder="Contact No"
             value={state.contactNumber.value}
@@ -320,34 +285,25 @@ const Item = ({
           <input
             className="focus-border"
             style={{
-              minWidth: "300px",
-              outline: "none",
-              background: "transparent",
-              border: "none",
+              minWidth: '300px',
+              outline: 'none',
+              background: 'transparent',
+              border: 'none'
             }}
             type="text"
-            onChange={(e) => dispatch({ type: "stock", value: e.target.value })}
+            onChange={e => dispatch({ type: 'stock', value: e.target.value })}
             disabled={disabled}
             placeholder="Quantity"
             value={state.stock.value}
           />
         </div>
         <div className="mb-0 d-flex justify-content-start align-items-center hid-on-large">
-          <button
-            style={{ width: "90px" }}
-            type="button"
-            className="btn btn-danger p-1 mt-2 me-2"
-          >
+          <button style={{ width: '90px' }} type="button" className="btn btn-danger p-1 mt-2 me-2">
             Delete
           </button>
           <div className="my-0">
-            <button
-              style={{ width: "90px" }}
-              type="button"
-              className="btn btn-success p-1 mt-2"
-              onClick={updateProduct}
-            >
-              {disabled ? "Update" : "Save"}
+            <button style={{ width: '90px' }} type="button" className="btn btn-success p-1 mt-2" onClick={updateProduct}>
+              {disabled ? 'Update' : 'Save'}
             </button>
           </div>
         </div>
