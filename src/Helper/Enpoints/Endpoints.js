@@ -68,6 +68,7 @@ export const getItems = async (page, cityId) => {
     return data.products;
   }
 };
+
 export const getItemsFromQuery = async (page, cityId, searchQuery) => {
   const response = await fetch(
     `${process.env.REACT_APP_BACKEND}/search/products/${cityId}?page=${page}&&search=${searchQuery}`,
@@ -99,6 +100,22 @@ export const getItemsForUser = async (userId, token) => {
     `${process.env.REACT_APP_BACKEND}/products/user/${userId}`,
     {
       method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  if (response.status === 200) {
+    const data = await response.json();
+    return data.products;
+  }
+};
+
+export const deleteItem = async (userId, productId, token) => {
+  const response = await fetch(
+    `${process.env.REACT_APP_BACKEND}/products/${productId}/${userId}`,
+    {
+      method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,
       },

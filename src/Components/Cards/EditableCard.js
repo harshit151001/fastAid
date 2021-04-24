@@ -1,7 +1,7 @@
 /* eslint-disable default-case */
 import React, { useState } from "react";
 import { useImmerReducer } from "use-immer";
-import { isAuthenticated } from "../../Helper/Enpoints/Endpoints";
+import { deleteItem, isAuthenticated } from "../../Helper/Enpoints/Endpoints";
 import Select from "react-select";
 import Axios from "axios";
 
@@ -117,6 +117,7 @@ const Item = ({
       message: "",
     },
   };
+
   const [disabled, setDisabled] = useState(true);
   const [selectedCity, setSelectedCity] = useState(city);
   const [resourceName, setResourceName] = useState(name);
@@ -295,6 +296,7 @@ const Item = ({
             style={{ width: "90px" }}
             type="button"
             className="btn btn-danger p-1 mt-2 me-2"
+            onClick={() => deleteItem(user._id, id, token)}
           >
             Delete
           </button>
