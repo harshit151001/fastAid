@@ -4,11 +4,25 @@ import { isAuthenticated } from '../../Helper/Enpoints/Endpoints';
 
 const Navbar = ({ cities, setCity, city }) => {
   const handleChange = e => {
+
     for (let city of cities) {
       if (city.name === e.target.value) {
+        const newPath = pathname.split("/");
+        newPath[2] = city._id;
         setCity(city._id);
+        history.push(newPath.join("/"));
       }
     }
+  };
+
+  const redirectToSearch = (e) => {
+    e.preventDefault();
+    const getAndSetItems = async () => {
+      const response = await getItemsFromQuery(1, city, searchQuery);
+      setSearchedItems(response);
+    };
+    getAndSetItems();
+    history.push(`/search/${city}/${searchQuery}/${1}`);
   };
 
   return (
@@ -25,16 +39,20 @@ const Navbar = ({ cities, setCity, city }) => {
           </Link>
         </div>
         <div className="d-md-flex">
+
           <form className="d-flex mx-md-2 mt-2 mt-md-0">
             <input className="form-control me-2" type="search" placeholder="City" aria-label="City search" name="cities" list="cities" onChange={handleChange} />
+
             <datalist id="cities">
               {cities.map(({ name, _id }) => (
                 <option key={_id}>{name}</option>
               ))}
             </datalist>
           </form>
+
           <form className="d-flex mx-md-2 mt-2 mt-md-0">
             <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+
             <button className="btn btn-outline-success" type="submit">
               Search
             </button>
@@ -48,4 +66,4 @@ const Navbar = ({ cities, setCity, city }) => {
   );
 };
 
-export default Navbar;
+export default withRouter(Navbar);

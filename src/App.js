@@ -1,15 +1,24 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 import Navbar from "./Components/Navbar/Navbar";
 import Home from "./Routes/Home";
 import Login from "./Routes/Login";
 import Dashboard from "./Routes/Dashboard";
 import { getCities } from "./Helper/Enpoints/Endpoints";
 import PrivateRoute from "./Helper/Auth/Privateroute";
+import Footer from "./Components/Footer/Footer";
+import Search from "./Routes/Search";
 
 const App = () => {
   const [city, setCity] = useState("60825bf9e03e88eae79f5b75");
   const [cities, setCities] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchedItems, setSearchedItems] = useState([]);
 
   useEffect(() => {
     let mounted = true;
@@ -25,28 +34,36 @@ const App = () => {
 
   return (
     <Router>
-      <Navbar cities={cities} city={city} setCity={setCity} />
+      <Navbar
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        cities={cities}
+        city={city}
+        setCity={setCity}
+        setSearchedItems={setSearchedItems}
+      />
       <Switch>
         <Route exact path="/">
+          <Redirect to={`/home/60825bf9e03e88eae79f5b75`} />
+        </Route>
+        <Route exact path="/home/:cityId">
           <Home city={city} />
+        </Route>
+        <Route exact path="/search/:cityId/:searchQuery/:page">
+          <Search
+            city={city}
+            searchedItems={searchedItems}
+            setSearchedItems={setSearchedItems}
+          />
         </Route>
         <Route exact path="/login" component={Login} />
         <PrivateRoute exact path="/dashboard">
           <Dashboard cities={cities} />
         </PrivateRoute>
       </Switch>
+      <Footer />
     </Router>
   );
 };
 
 export default App;
-
-// option=>data list ( for cities )
-// Home screen: List of cities ( in cards )
-// Change text Please login to add resources => Have any supplier info? button
-// Differentiate b/w supplier and general public
-// Populate db
-// Logo
-// Cards eliviation and background
-// Beside search add category selector ( fixed initial categories )
-// Hospital beds link :gimic

@@ -4,19 +4,20 @@ import ItemsList from "../Components/Lists/ItemsList";
 import { getItems } from "../Helper/Enpoints/Endpoints";
 
 const Home = ({ city }) => {
+  const [page, setPage] = useState(1);
   const [items, setItems] = useState([]);
 
   useEffect(() => {
     let mounted = true;
     if (mounted) {
       const getAndSetItems = async () => {
-        const response = await getItems(city);
+        const response = await getItems(page, city);
         setItems(response);
       };
       getAndSetItems();
     }
     return () => (mounted = false);
-  }, [city]);
+  }, [city, page]);
 
   return (
     <div style={{ background: "#fafafa" }}>
@@ -42,16 +43,23 @@ const Home = ({ city }) => {
           )
         )}
       </ItemsList>
+      <div className="d-flex align-items-center justify-content-center p-4">
+        <button
+          disabled={page === 1}
+          onClick={() => setPage((page) => (page > 1 ? page - 1 : page))}
+          className="btn btn-success mx-2"
+        >
+          Back
+        </button>
+        <button
+          onClick={() => setPage((page) => page + 1)}
+          className="btn btn-success mx-2"
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 };
 
 export default Home;
-
-// name,
-//   id,
-//   companyName,
-//   city,
-//   contactNumber,
-//   stock,
-//   address,
