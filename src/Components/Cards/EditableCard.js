@@ -224,6 +224,7 @@ const Item = ({
             value={selectedCity}
             onChange={onchangeSelect}
             options={cityOptions}
+            disabled={disabled}
             getOptionValue={(option) => option.name}
             getOptionLabel={(option) => option.name}
           />
