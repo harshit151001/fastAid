@@ -1,6 +1,8 @@
+/* eslint-disable default-case */
 import React, { useState } from 'react';
 import { useImmerReducer } from 'use-immer';
 import { isAuthenticated } from '../../Helper/Enpoints/Endpoints';
+import Select from 'react-select';
 import Axios from 'axios';
 
 export function ourReducer(draft, action) {
@@ -44,15 +46,6 @@ export function ourReducer(draft, action) {
         draft.address.message = 'required';
       }
       return;
-    case 'city':
-      draft.city.value = action.value;
-      if (action.value.length) {
-        draft.city.hasErrors = false;
-      } else {
-        draft.city.hasErrors = true;
-        draft.city.message = 'required';
-      }
-      return;
 
     case 'stock':
       draft.stock.value = action.value;
@@ -63,17 +56,16 @@ export function ourReducer(draft, action) {
         draft.stock.message = 'required';
       }
       return;
+
+    default:
+      return;
   }
 }
 
-const Item = ({ name, id, companyName, city, contactNumber, stock, address, create }) => {
-  console.log(create);
+const Item = ({ name, id, companyName, city, contactNumber, stock, address, create, cities }) => {
+  const cityOptions = [...cities];
+
   const initialState = {
-    city: {
-      value: city.name || '',
-      hasErrors: false,
-      message: ''
-    },
     companyName: {
       value: companyName,
       hasErrors: false,
@@ -103,7 +95,12 @@ const Item = ({ name, id, companyName, city, contactNumber, stock, address, crea
     }
   };
   const [disabled, setDisabled] = useState(true);
-  const [errors, setErrors] = useState(0);
+  const [selectedCity, setSelectedCity] = useState(city);
+  const [currentCity, setCurrentCity] = useState(null);
+  const onchangeSelect = item => {
+    setCurrentCity(null);
+    setSelectedCity(item);
+  };
   const { token, user } = isAuthenticated();
   const config = {
     headers: { Authorization: `Bearer ${token}` }
@@ -123,17 +120,18 @@ const Item = ({ name, id, companyName, city, contactNumber, stock, address, crea
         }
       }
       if (!checkErr.length) {
-        const { name, companyName, city, address, contactNumber, stock } = state;
+        const { name, companyName, address, contactNumber, stock } = state;
         const fd = new FormData();
+
+        console.log('city:', city.value);
 
         fd.append(`name`, name.value);
         fd.append(`companyName`, companyName.value);
         fd.append(`address`, address.value);
         fd.append(`contactNumber`, contactNumber.value);
         fd.append(`user`, user._id);
-        fd.append(`city`, '60825bf9e03e88eae79f5b75');
+        fd.append(`city`, selectedCity._id);
         fd.append(`stock`, stock.value);
-        console.log(create);
 
         if (create) {
           Axios.post(`${process.env.REACT_APP_BACKEND}/product/create/${user._id}`, fd, config).then(
@@ -157,8 +155,6 @@ const Item = ({ name, id, companyName, city, contactNumber, stock, address, crea
       } else {
         console.log('Error in Validation');
       }
-
-      // Make request
     } else setDisabled(disabled => !disabled);
   };
 
@@ -167,27 +163,139 @@ const Item = ({ name, id, companyName, city, contactNumber, stock, address, crea
       <div className="card shadow-sm rounded input-group p-2 px-3 my-2 card-special">
         <div className="mb-0 d-flex justify-content-between align-items-center">
           <div className="h4 my-0 text-success">
-            <input type="text" onChange={e => dispatch({ type: 'name', value: e.target.value })} disabled={disabled} placeholder="Resource name" value={state.name.value} />
+            <input
+              className="focus-border"
+              style={{
+                minWidth: '300px',
+                outline: 'none',
+                background: 'transparent',
+                border: 'none'
+              }}
+              type="text"
+              onChange={e => dispatch({ type: 'name', value: e.target.value })}
+              disabled={disabled}
+              placeholder="name"
+              value={state.name.value}
+            />
           </div>
         </div>
         <div className="mb-0 d-flex justify-content-between align-items-center">
           <div className="text-muted mb-0">
-            <input onChange={e => dispatch({ type: 'companyName', value: e.target.value })} type="text" disabled={disabled} placeholder="Company Name" value={state.companyName.value} />
+            <input
+              className="focus-border"
+              style={{
+                minWidth: '300px',
+                outline: 'none',
+                background: 'transparent',
+                border: 'none'
+              }}
+              onChange={e => dispatch({ type: 'companyName', value: e.target.value })}
+              type="text"
+              disabled={disabled}
+              placeholder="Company Name"
+              value={state.companyName.value}
+            />
           </div>
         </div>
         <div className="mb-0">
-          <strong>
-            <input onChange={e => dispatch({ type: 'city', value: e.target.value })} type="text" disabled={disabled} placeholder="City" value={state.city.value} />
-          </strong>
+          {/* <strong> */}
+          {/* <input
+              className="focus-border"
+              style={{
+                minWidth: "300px",
+                outline: "none",
+                background: "transparent",
+                border: "none",
+              }}
+              onChange={(e) =>
+                dispatch({ type: "city", value: e.target.value })
+              }
+              type="text"
+              disabled={disabled}
+              placeholder="City"
+              value={state.city.value}
+            /> */}
+
+          {/* <input
+              className="focus-border"
+              style={{
+                minWidth: '300px',
+                outline: 'none',
+                background: 'transparent',
+                border: 'none'
+              }}
+              type="text"
+              disabled={disabled}
+              placeholder="City"
+              aria-label="City"
+              name="cities"
+              list="cities"
+              value={state.city.value}
+              onChange={e => {
+                console.log(e);
+                dispatch({
+                  type: 'city',
+                  value: e.target.value
+                });
+              }}
+            />
+            <datalist id="cities">
+              {cities.map(({ name, _id }) => (
+                <option key={_id}>{name}</option>
+              ))}
+            
+            </datalist> */}
+          {console.log(selectedCity)}
+          <Select value={selectedCity} onChange={onchangeSelect} options={cityOptions} getOptionValue={option => option.name} getOptionLabel={option => option.name} />
+          {/* </strong> */}
         </div>
         <div className="mb-0">
-          <input onChange={e => dispatch({ type: 'address', value: e.target.value })} type="text" disabled={disabled} placeholder="Address" value={state.address.value} />
+          <input
+            className="focus-border"
+            style={{
+              minWidth: '300px',
+              outline: 'none',
+              background: 'transparent',
+              border: 'none'
+            }}
+            onChange={e => dispatch({ type: 'address', value: e.target.value })}
+            type="text"
+            disabled={disabled}
+            placeholder="Address"
+            value={state.address.value}
+          />
         </div>
         <div className="mb-0">
-          <input type="text" onChange={e => dispatch({ type: 'contactNumber', value: e.target.value })} disabled={disabled} placeholder="Contact No" value={state.contactNumber.value} />
+          <input
+            className="focus-border"
+            style={{
+              minWidth: '300px',
+              outline: 'none',
+              background: 'transparent',
+              border: 'none'
+            }}
+            type="text"
+            onChange={e => dispatch({ type: 'contactNumber', value: e.target.value })}
+            disabled={disabled}
+            placeholder="Contact No"
+            value={state.contactNumber.value}
+          />
         </div>
         <div className="mb-0">
-          <input type="text" onChange={e => dispatch({ type: 'stock', value: e.target.value })} disabled={disabled} placeholder="Quantity" value={state.stock.value} />
+          <input
+            className="focus-border"
+            style={{
+              minWidth: '300px',
+              outline: 'none',
+              background: 'transparent',
+              border: 'none'
+            }}
+            type="text"
+            onChange={e => dispatch({ type: 'stock', value: e.target.value })}
+            disabled={disabled}
+            placeholder="Quantity"
+            value={state.stock.value}
+          />
         </div>
         <div className="mb-0 d-flex justify-content-start align-items-center hid-on-large">
           <button style={{ width: '90px' }} type="button" className="btn btn-danger p-1 mt-2 me-2">

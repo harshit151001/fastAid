@@ -38,6 +38,17 @@
 }
 
 .card-special {
+  background: #f5f5f5;
   border-radius: 15px !important;
-  border: 2px solid #198754;
+  transition: all 0.3s ease;
+}
+.card-special:hover {
+  border: 1px solid #198754;
+}
+
+.focus-border {
+  border-bottom: 1px solid #807d7d !important;
+}
+.focus-border:disabled {
+  border: none !important;
 }
