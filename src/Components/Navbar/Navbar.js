@@ -20,7 +20,6 @@ const Navbar = ({
   setSearchedItems,
 }) => {
   const { pathname } = location;
-  console.log("Match", match);
 
   useEffect(() => {
     if (
@@ -59,7 +58,7 @@ const Navbar = ({
   };
 
   return (
-    <nav style={{ zIndex: 1000 }} className="navbar-dark bg-dark">
+    <nav className="navbar-dark bg-dark">
       <div className="container-fluid d-md-flex p-2 justify-content-between">
         <div className="d-flex justify-content-between">
           <div className="navbar-brand order-0 text-success">

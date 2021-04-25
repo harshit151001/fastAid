@@ -22,7 +22,10 @@ const Item = ({
   return (
     <div style={{ zIndex: "0" }} className="col-md col-md-6">
       <div
-        style={{ borderColor: user ? "#198754" : "#0099ff" }}
+        style={{
+          borderColor: user ? "#198754" : "#0099ff",
+          overflow: "hidden",
+        }}
         className="card shadow rounded input-group p-2 px-3 my-2 card-special"
       >
         <div className="mb-0 d-flex justify-content-between align-items-center">
@@ -56,8 +59,10 @@ const Item = ({
         <div className="mb-0 lead">
           <strong>{city.name}</strong>
         </div>
-        <div className="mb-0 ">{address || ""}</div>
-        <div className="mb-0 ">Contact Information: {contactNumber || ""}</div>
+        <div className="mb-0 d-inline-block text-truncate">{address || ""}</div>
+        <div className="mb-0 text-truncate">
+          Contact Information: {contactNumber || ""}
+        </div>
         <div className="mb-0 text-success lead">
           <strong>{stock ? `${stock} Available` : ""}</strong>
         </div>

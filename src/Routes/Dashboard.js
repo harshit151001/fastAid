@@ -4,7 +4,7 @@ import EditableCard from "../Components/Cards/EditableCard";
 import ItemsList from "../Components/Lists/ItemsList";
 import { getItemsForUser, isAuthenticated } from "../Helper/Enpoints/Endpoints";
 
-const zIndex = 100000;
+const zIndex = 100;
 
 const Dashboard = ({ cities, categories }) => {
   const {
@@ -43,7 +43,7 @@ const Dashboard = ({ cities, categories }) => {
   };
 
   return (
-    <div style={{ background: "#fafafa" }} className="bg-light">
+    <div style={{ background: "#fafafa", zIndex: 0 }} className="bg-light">
       <div
         className="alert alert-success mt-0 mb-2 d-flex justify-content-between align-items-center"
         role="alert"
