@@ -23,6 +23,10 @@ const App = () => {
   const [categories, setCategories] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchedItems, setSearchedItems] = useState([]);
+  const [cityfs, setCityFs] = useState({
+    name: "Aurangabad",
+    _id: "60825bf9e03e88eae79f5b75",
+  });
 
   useEffect(() => {
     let mounted = true;
@@ -45,6 +49,8 @@ const App = () => {
         setSearchQuery={setSearchQuery}
         cities={cities}
         city={city}
+        cityfs={cityfs}
+        setCityFs={setCityFs}
         setCity={setCity}
         setSearchedItems={setSearchedItems}
       />

@@ -5,7 +5,7 @@ import {
   isAuthenticated,
 } from "../../Helper/Enpoints/Endpoints";
 import logo from "../Assets/logo.png";
-
+import Select from "react-select";
 const Navbar = ({
   cities,
   setCity,
@@ -14,18 +14,24 @@ const Navbar = ({
   setSearchQuery,
   history,
   location,
+  cityfs,
+  setCityFs,
   setSearchedItems,
 }) => {
   const { pathname } = location;
 
-  const handleChange = (e) => {
+  console.log("City", city);
+
+  const handleChange = (item) => {
+    console.log("Item", item);
     for (let city of cities) {
-      if (city.name === e.target.value) {
+      if (city.name === item.name) {
         if (pathname !== "/dashboard") {
           const newPath = pathname.split("/");
-          newPath[2] = city._id;
+          newPath[2] = item._id;
           history.push(newPath.join("/"));
         }
+        setCityFs(city);
         setCity(city._id);
       }
     }
@@ -72,20 +78,13 @@ const Navbar = ({
             style={{ minWidth: "200px" }}
             className="mx-md-2 mt-2 mt-md-0"
           >
-            <input
-              className="form-control me-2"
-              type="search"
-              placeholder="City"
-              aria-label="City search"
-              name="cities"
-              list="cities"
+            <Select
+              value={cityfs}
               onChange={handleChange}
-            />
-            <datalist id="cities">
-              {cities.map(({ name, _id }) => (
-                <option key={_id}>{name}</option>
-              ))}
-            </datalist>
+              options={cities}
+              getOptionValue={(option) => option._id}
+              getOptionLabel={(option) => option.name}
+            ></Select>
           </form>
           <form
             onSubmit={redirectToSearch}
