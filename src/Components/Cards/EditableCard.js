@@ -268,7 +268,7 @@ const Item = ({
         </div>
         <div className="mb-0 d-flex justify-content-start align-items-center hid-on-large">
           <button
-            style={{ width: "90px", color: "#fafafa" }}
+            style={{ width: "90px" }}
             type="button"
             className="btn btn-danger p-1 mt-2 me-2"
             onClick={() => {
@@ -283,9 +283,9 @@ const Item = ({
           </button>
           <div className="my-0">
             <button
-              style={{ width: "90px", color: "#55f9d1" }}
+              style={{ width: "90px" }}
               type="button"
-              className="btn btn-dark p-1 mt-2"
+              className="btn btn-success p-1 mt-2"
               onClick={updateProduct}
             >
               {disabled ? "Update" : "Save"}

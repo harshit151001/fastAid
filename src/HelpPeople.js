@@ -1,8 +1,8 @@
-import React from "react";
-import { withRouter, Link } from "react-router-dom";
+// import React from "react";
+// import { withRouter, Link } from "react-router-dom";
 
-const HelpPeople = ({ match, history }) => {
-  return <div style={{ background: "#fafafa" }}>Help People</div>;
-};
+// const HelpPeople = ({ match, history }) => {
+//   return <div style={{ background: "#fafafa" }}>Help People</div>;
+// };
 
-export default withRouter(HelpPeople);
+// export default withRouter(HelpPeople);
