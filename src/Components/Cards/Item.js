@@ -24,7 +24,6 @@ const Item = ({
       <div
         style={{
           borderColor: user ? "#198754" : "#0099ff",
-          overflow: "hidden",
         }}
         className="card shadow rounded input-group p-2 px-3 my-2 card-special"
       >
@@ -55,15 +54,19 @@ const Item = ({
             </button>
           </div>
         </div>
-        <div className="text-muted mb-0">{companyName || ""}</div>
+        <div className="text-muted mb-0 overflow-hidden text-truncate">
+          {companyName || ""}
+        </div>
         <div className="mb-0 lead">
           <strong>{city.name}</strong>
         </div>
-        <div className="mb-0 d-inline-block text-truncate">{address || ""}</div>
-        <div className="mb-0 text-truncate">
+        <div className="mb-0 d-inline-block text-truncate overflow-hidden">
+          {address || ""}
+        </div>
+        <div className="mb-0 text-truncate overflow-hidden">
           Contact Information: {contactNumber || ""}
         </div>
-        <div className="mb-0 text-success lead">
+        <div className="mb-0 text-success lead overflow-hidden">
           <strong>{stock ? `${stock} Available` : ""}</strong>
         </div>
       </div>

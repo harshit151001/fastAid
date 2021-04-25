@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <div className="navbar-dark bg-dark p-4 pb-2 align-items-center justify-content-center">
       <div className="text-success text-center fs-5 pb-1">
-        Created by Fastdev to aid India in a fast and efficient manner!
+        Created by Fastdev to aid India in a fast and efficient manner !
       </div>
       <div className="p-0 m-0 flex-column flex-md-row d-flex align-items-center justify-content-center fs-6">
         <a
