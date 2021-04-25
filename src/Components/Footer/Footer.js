@@ -26,12 +26,12 @@ const Footer = () => {
         >
           Tejas Deshpande
         </a>
-        <a
+        {/* <a
           className="text-success mx-2 text-decoration-none"
           href="https://www.linkedin.com/in/abhijit-kumar-983546170/"
         >
           Abhijit Kumar
-        </a>
+        </a> */}
       </div>
       <div className="p-0 m-0 flex-column flex-md-row d-flex align-items-center justify-content-center fs-6">
         <Link to="/disclaimer" className="lead text-success">

@@ -3,7 +3,6 @@ import { Link, withRouter } from "react-router-dom";
 import {
   getItemsFromQuery,
   isAuthenticated,
-  getItems,
 } from "../../Helper/Enpoints/Endpoints";
 import logo from "../Assets/logo.png";
 import Select from "react-select";
@@ -52,17 +51,8 @@ const Navbar = ({
   const redirectToSearch = (e) => {
     e.preventDefault();
     const getAndSetItems = async () => {
-      if (
-        searchQuery === "" ||
-        searchQuery === null ||
-        searchQuery === undefined
-      ) {
-        const response = await getItems(1, city);
-        return setSearchedItems(response);
-      } else {
-        const response = await getItemsFromQuery(1, city, searchQuery);
-        setSearchedItems(response);
-      }
+      const response = await getItemsFromQuery(1, city, searchQuery);
+      setSearchedItems(response);
     };
     getAndSetItems();
     history.push(`/search/${pathname.split("/")[2]}/${searchQuery}/${1}`);
