@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -31,6 +32,11 @@ const Footer = () => {
         >
           Tejas Deshpande
         </a>
+      </div>
+      <div className="p-0 m-0 flex-column flex-md-row d-flex align-items-center justify-content-center fs-6">
+        <Link to="/disclaimer" className="lead text-success">
+          Disclaimer
+        </Link>
       </div>
       <br />
       <div className="text-success text-center mt-0 pt-0">© 2021 FastAid</div>
