@@ -68,7 +68,15 @@ const Item = ({
           )}
         </div>
         <div className="mb-0 truncate overflow-hidden">
-          Contact Information: {contactNumber || ""}
+          {contactNumber ? (
+            <>
+              <strong>Contact Info:</strong> {contactNumber}
+            </>
+          ) : (
+            <>
+              <strong>Contact Info:</strong> {`N/A`}
+            </>
+          )}
         </div>
         <div className="mb-0 text-success truncate lead overflow-hidden">
           <strong>{stock ? `${stock} Available` : ""}</strong>
