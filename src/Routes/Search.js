@@ -32,7 +32,7 @@ const Search = (props) => {
         </Link>
       </div>
       <ItemsList>
-        {items &&
+        {items.length > 0 ? (
           items.map(
             ({
               name,
@@ -58,7 +58,14 @@ const Search = (props) => {
                 contactNumber={contactNumber}
               />
             )
-          )}
+          )
+        ) : (
+          <div className="p-4">
+            <p class="display-4 text-center">
+              Sorry, No items matched your search.
+            </p>
+          </div>
+        )}
       </ItemsList>
       <div className="d-flex align-items-center justify-content-center p-4">
         <button

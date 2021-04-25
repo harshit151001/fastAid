@@ -54,19 +54,19 @@ const Item = ({
             </button>
           </div>
         </div>
-        <div className="text-muted mb-0 overflow-hidden text-truncate">
+        <div className="text-muted mb-0 overflow-hidden truncate">
           {companyName || ""}
         </div>
         <div className="mb-0 lead">
           <strong>{city.name}</strong>
         </div>
-        <div className="mb-0 d-inline-block text-truncate overflow-hidden">
+        <div className="mb-0 d-inline-block truncate overflow-hidden">
           {address || ""}
         </div>
         <div className="mb-0 text-truncate overflow-hidden">
           Contact Information: {contactNumber || ""}
         </div>
-        <div className="mb-0 text-success lead overflow-hidden">
+        <div className="mb-0 text-success truncate lead overflow-hidden">
           <strong>{stock ? `${stock} Available` : ""}</strong>
         </div>
       </div>

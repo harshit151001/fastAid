@@ -23,9 +23,6 @@ const Home = ({ match, history }) => {
 
   return (
     <div style={{ background: "#fafafa" }}>
-      {/* <div>
-        <Link to="/">Doctors</Link> <Link to="/">Track hospital beds</Link> <Link to="/ask-help">Ask for help</Link> <Link to="help-people">Help people around you</Link>
-      </div> */}
       <div
         className="alert alert-success mt-0 mb-1 justify-content-between align-items-center"
         role="alert"
@@ -36,35 +33,41 @@ const Home = ({ match, history }) => {
         </Link>
       </div>
       <ItemsList>
-        {items.map(
-          ({
-            name,
-            stock,
-            _id,
-            contactNumber,
-            address,
-            companyName,
-            city,
-            user,
-            category,
-            likes,
-            dislikes,
-          }) => (
-            <Item
-              name={name}
-              stock={stock}
-              key={_id}
-              likes={likes}
-              dislikes={dislikes}
-              id={_id}
-              city={city}
-              user={user?.seller}
-              category={category}
-              companyName={companyName}
-              address={address}
-              contactNumber={contactNumber}
-            />
+        {items.length > 0 ? (
+          items.map(
+            ({
+              name,
+              stock,
+              _id,
+              contactNumber,
+              address,
+              companyName,
+              city,
+              user,
+              category,
+              likes,
+              dislikes,
+            }) => (
+              <Item
+                name={name}
+                stock={stock}
+                key={_id}
+                likes={likes}
+                dislikes={dislikes}
+                id={_id}
+                city={city}
+                user={user?.seller}
+                category={category}
+                companyName={companyName}
+                address={address}
+                contactNumber={contactNumber}
+              />
+            )
           )
+        ) : (
+          <div className="p-4">
+            <p class="display-4 text-center">Sorry, No items found.</p>
+          </div>
         )}
       </ItemsList>
       <div className="d-flex align-items-center justify-content-center p-4">

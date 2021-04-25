@@ -52,3 +52,9 @@
 .focus-border:disabled {
   border: none !important;
 }
+.truncate {
+  width: 300px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
