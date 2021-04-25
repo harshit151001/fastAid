@@ -3,6 +3,7 @@ import { Link, withRouter } from "react-router-dom";
 import {
   getItemsFromQuery,
   isAuthenticated,
+  getItems,
 } from "../../Helper/Enpoints/Endpoints";
 import logo from "../Assets/logo.png";
 import Select from "react-select";
@@ -49,8 +50,18 @@ const Navbar = ({
   const redirectToSearch = (e) => {
     e.preventDefault();
     const getAndSetItems = async () => {
-      const response = await getItemsFromQuery(1, city, searchQuery);
-      setSearchedItems(response);
+      console.log("search", searchQuery);
+      if (
+        searchQuery === "" ||
+        searchQuery === null ||
+        searchQuery === undefined
+      ) {
+        const response = await getItems(1, city);
+        return setSearchedItems(response);
+      } else {
+        const response = await getItemsFromQuery(1, city, searchQuery);
+        setSearchedItems(response);
+      }
     };
     getAndSetItems();
     history.push(`/search/${city}/${searchQuery}/${1}`);
@@ -107,7 +118,15 @@ const Navbar = ({
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
-            <button className="btn btn-outline-success" type="submit">
+            <button
+              disabled={
+                searchQuery === "" ||
+                searchQuery === null ||
+                searchQuery === undefined
+              }
+              className="btn btn-outline-success"
+              type="submit"
+            >
               Search
             </button>
           </form>

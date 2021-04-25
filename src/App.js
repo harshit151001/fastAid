@@ -33,8 +33,8 @@ const App = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchedItems, setSearchedItems] = useState([]);
   const [cityfs, setCityFs] = useState({
-    name: "Aurangabad",
-    _id: "60825bf9e03e88eae79f5b75",
+    name: "Delhi",
+    _id: "6085272862ce493a176fe1f0",
   });
 
   useEffect(() => {
@@ -66,17 +66,11 @@ const App = () => {
         />
         <Switch>
           <Route exact path="/">
-            <Redirect to={`/home/60825bf9e03e88eae79f5b75/1`} />
+            <Redirect to={`/home/6085272862ce493a176fe1f0/1`} />
           </Route>
           <Route exact path="/home/:cityId/:page">
             <Home city={city} />
           </Route>
-          {/* <Route exact path="/help-people">
-          <HelpPeople city={city} />
-        </Route>
-        <Route exact path="/ask-help">
-          <AskForHelp city={city} />
-        </Route> */}
           <Route exact path="/search/:cityId/:searchQuery/:page">
             <Search
               city={city}
