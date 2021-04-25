@@ -6,8 +6,8 @@ import {
   Redirect,
 } from "react-router-dom";
 import Navbar from "./Components/Navbar/Navbar";
-import AskForHelp from "./AskForHelp";
-import HelpPeople from "./HelpPeople";
+// import AskForHelp from "./AskForHelp";
+// import HelpPeople from "./HelpPeople";
 import Home from "./Routes/Home";
 import Login from "./Routes/Login";
 import Dashboard from "./Routes/Dashboard";
@@ -61,12 +61,12 @@ const App = () => {
         <Route exact path="/home/:cityId/:page">
           <Home city={city} />
         </Route>
-        <Route exact path="/help-people">
+        {/* <Route exact path="/help-people">
           <HelpPeople city={city} />
         </Route>
         <Route exact path="/ask-help">
           <AskForHelp city={city} />
-        </Route>
+        </Route> */}
         <Route exact path="/search/:cityId/:searchQuery/:page">
           <Search
             city={city}

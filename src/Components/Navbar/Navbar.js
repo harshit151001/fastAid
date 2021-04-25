@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, withRouter } from "react-router-dom";
 import {
   getItemsFromQuery,
@@ -20,7 +20,16 @@ const Navbar = ({
 }) => {
   const { pathname } = location;
 
-  console.log("City", city);
+  useEffect(() => {
+    if (
+      pathname.split("/")[1] === "home" ||
+      pathname.split("/")[1] === "search"
+    ) {
+      setCityFs(() =>
+        cities.find((element) => element._id === pathname.split("/")[2])
+      );
+    }
+  }, [pathname, cities, setCityFs]);
 
   const handleChange = (item) => {
     console.log("Item", item);
