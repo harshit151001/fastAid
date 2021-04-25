@@ -37,7 +37,7 @@ const Footer = () => {
           className="text-success mx-2 text-decoration-none"
           href="https://www.linkedin.com/in/riya-jha"
         >
-          Ria Jha
+          Riya Jha
         </a>
       </div>
       <div className="p-0 m-0 flex-column flex-md-row d-flex align-items-center justify-content-center fs-6">
