@@ -67,7 +67,7 @@ const Item = ({
             address || ""
           )}
         </div>
-        <div className="mb-0 text-truncate overflow-hidden">
+        <div className="mb-0 truncate overflow-hidden">
           Contact Information: {contactNumber || ""}
         </div>
         <div className="mb-0 text-success truncate lead overflow-hidden">
