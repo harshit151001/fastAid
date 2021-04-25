@@ -61,7 +61,11 @@ const Item = ({
           <strong>{city.name}</strong>
         </div>
         <div className="mb-0 d-inline-block truncate overflow-hidden">
-          {address || ""}
+          {address?.startsWith("https") ? (
+            <a href={address}>{address}</a>
+          ) : (
+            address || ""
+          )}
         </div>
         <div className="mb-0 text-truncate overflow-hidden">
           Contact Information: {contactNumber || ""}

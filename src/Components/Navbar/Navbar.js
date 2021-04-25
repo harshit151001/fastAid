@@ -64,10 +64,13 @@ const Navbar = ({
           <div className="navbar-brand order-0 text-success">
             <Link style={{ textDecoration: "none", color: "inherit" }} to="/">
               <img
-                style={{ width: "40px", position: "absolute", top: "8px" }}
+                style={{ height: "40px", position: "absolute", top: "8px" }}
                 src={logo}
                 alt="logo"
               />
+              <span style={{ position: "relative", left: "39px" }}>
+                FastAid
+              </span>
             </Link>
           </div>
           <Link
