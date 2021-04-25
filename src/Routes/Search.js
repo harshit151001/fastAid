@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Item from "../Components/Cards/Item";
 import ItemsList from "../Components/Lists/ItemsList";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import { getItemsFromQuery } from "../Helper/Enpoints/Endpoints";
 
 const Search = (props) => {
