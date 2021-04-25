@@ -1,3 +1,13 @@
+$theme-colors: (
+  "success": #55f9d1,
+  "danger": #ff4136,
+  "dark": #383838,
+  "primary": #55f,
+  "light": #f5f5f5,
+);
+
+@import "~bootstrap/scss/bootstrap.scss";
+
 .global-container {
   height: 90vh;
   display: flex;
@@ -42,9 +52,9 @@
   border-radius: 15px !important;
   transition: all 0.3s ease;
 }
-.card-special:hover {
-  border: 1px solid #198754;
-}
+// .card-special:hover {
+//   border: 1px solid #55f9d1;
+// }
 
 .focus-border {
   border-bottom: 1px solid #807d7d !important;

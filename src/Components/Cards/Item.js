@@ -1,4 +1,5 @@
 import React from "react";
+import { HandThumbsUp, HandThumbsDown } from "react-bootstrap-icons";
 
 const Item = ({
   name,
@@ -21,8 +22,11 @@ const Item = ({
         <div className="mb-0 d-flex justify-content-between align-items-center">
           <div className="h4 my-0 text-success">{category?.name || name}</div>
           <div className="my-0">
+            <button id={id} type="button" className="btn btn-success me-3">
+              <HandThumbsUp />
+            </button>
             <button id={id} type="button" className="btn btn-danger">
-              Report
+              <HandThumbsDown />
             </button>
           </div>
         </div>

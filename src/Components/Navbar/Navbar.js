@@ -4,6 +4,7 @@ import {
   getItemsFromQuery,
   isAuthenticated,
 } from "../../Helper/Enpoints/Endpoints";
+import logo from "../Assets/logo.png";
 
 const Navbar = ({
   cities,
@@ -46,7 +47,11 @@ const Navbar = ({
         <div className="d-flex justify-content-between">
           <div className="navbar-brand order-0 text-success">
             <Link style={{ textDecoration: "none", color: "inherit" }} to="/">
-              FastAid
+              <img
+                style={{ width: "40px", position: "absolute", top: "8px" }}
+                src={logo}
+                alt="logo"
+              />
             </Link>
           </div>
           <Link

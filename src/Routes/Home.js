@@ -32,7 +32,7 @@ const Home = ({ match, history }) => {
       >
         <span className="lead order-1">Know some resources? </span>
         <Link to={{ pathname: "/login", state: { seller: 0 } }}>
-          <button className="btn btn-success">Voulenteer Here</button>
+          <button className="btn btn-success">Add Info</button>
         </Link>
       </div>
       <ItemsList>
