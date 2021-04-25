@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { HandThumbsUp, HandThumbsDown } from "react-bootstrap-icons";
+import { likeFn, dislikeFn } from "../../Helper/Enpoints/Endpoints";
 
 const Item = ({
   name,
@@ -11,7 +12,12 @@ const Item = ({
   address,
   user,
   category,
+  likes,
+  dislikes,
 }) => {
+  const [like, setLike] = useState(+likes || 0);
+  const [dislike, setDislike] = useState(+dislikes || 0);
+
   console.log(user);
   return (
     <div style={{ zIndex: "0" }} className="col-md col-md-6">
@@ -22,11 +28,27 @@ const Item = ({
         <div className="mb-0 d-flex justify-content-between align-items-center">
           <div className="h4 my-0 text-success">{category?.name || name}</div>
           <div className="my-0">
-            <button id={id} type="button" className="btn btn-success me-3">
-              <HandThumbsUp />
+            <button
+              onClick={async () => {
+                const response = await likeFn(id);
+                response && setLike((like) => like + 1);
+              }}
+              id={id}
+              type="button"
+              className="btn btn-success me-3"
+            >
+              <HandThumbsUp /> {like}
             </button>
-            <button id={id} type="button" className="btn btn-danger">
-              <HandThumbsDown />
+            <button
+              onClick={async () => {
+                const response = await dislikeFn(id);
+                response && setDislike((dislike) => dislike + 1);
+              }}
+              id={id}
+              type="button"
+              className="btn btn-danger"
+            >
+              <HandThumbsDown /> {dislike}
             </button>
           </div>
         </div>

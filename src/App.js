@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Redirect,
+  withRouter,
 } from "react-router-dom";
 import Navbar from "./Components/Navbar/Navbar";
 // import AskForHelp from "./AskForHelp";
@@ -16,6 +17,14 @@ import PrivateRoute from "./Helper/Auth/Privateroute";
 import Footer from "./Components/Footer/Footer";
 import Search from "./Routes/Search";
 import Disclaimer from "./Routes/Disclaimer";
+
+const ScrollToTop = withRouter(({ children, location: { pathname } }) => {
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return children || null;
+});
 
 const App = () => {
   const [city, setCity] = useState("60825bf9e03e88eae79f5b75");
@@ -44,43 +53,45 @@ const App = () => {
 
   return (
     <Router>
-      <Navbar
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-        cities={cities}
-        city={city}
-        cityfs={cityfs}
-        setCityFs={setCityFs}
-        setCity={setCity}
-        setSearchedItems={setSearchedItems}
-      />
-      <Switch>
-        <Route exact path="/">
-          <Redirect to={`/home/60825bf9e03e88eae79f5b75/1`} />
-        </Route>
-        <Route exact path="/home/:cityId/:page">
-          <Home city={city} />
-        </Route>
-        {/* <Route exact path="/help-people">
+      <ScrollToTop>
+        <Navbar
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          cities={cities}
+          city={city}
+          cityfs={cityfs}
+          setCityFs={setCityFs}
+          setCity={setCity}
+          setSearchedItems={setSearchedItems}
+        />
+        <Switch>
+          <Route exact path="/">
+            <Redirect to={`/home/60825bf9e03e88eae79f5b75/1`} />
+          </Route>
+          <Route exact path="/home/:cityId/:page">
+            <Home city={city} />
+          </Route>
+          {/* <Route exact path="/help-people">
           <HelpPeople city={city} />
         </Route>
         <Route exact path="/ask-help">
           <AskForHelp city={city} />
         </Route> */}
-        <Route exact path="/search/:cityId/:searchQuery/:page">
-          <Search
-            city={city}
-            searchedItems={searchedItems}
-            setSearchedItems={setSearchedItems}
-          />
-        </Route>
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/disclaimer" component={Disclaimer} />
-        <PrivateRoute exact path="/dashboard">
-          <Dashboard categories={categories} cities={cities} />
-        </PrivateRoute>
-      </Switch>
-      <Footer />
+          <Route exact path="/search/:cityId/:searchQuery/:page">
+            <Search
+              city={city}
+              searchedItems={searchedItems}
+              setSearchedItems={setSearchedItems}
+            />
+          </Route>
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/disclaimer" component={Disclaimer} />
+          <PrivateRoute exact path="/dashboard">
+            <Dashboard categories={categories} cities={cities} />
+          </PrivateRoute>
+        </Switch>
+        <Footer />
+      </ScrollToTop>
     </Router>
   );
 };

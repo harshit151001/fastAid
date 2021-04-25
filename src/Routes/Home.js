@@ -47,11 +47,15 @@ const Home = ({ match, history }) => {
             city,
             user,
             category,
+            likes,
+            dislikes,
           }) => (
             <Item
               name={name}
               stock={stock}
               key={_id}
+              likes={likes}
+              dislikes={dislikes}
               id={_id}
               city={city}
               user={user?.seller}

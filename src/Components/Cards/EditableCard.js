@@ -98,7 +98,7 @@ const Item = ({
   const [selectedCity, setSelectedCity] = useState(city);
   const [selectedResource, setSelectedResource] = useState(category);
 
-  console.log("City :", city);
+  // console.log("Create", create);
 
   const onchangeSelect = (item) => {
     setSelectedCity(item);
@@ -114,8 +114,12 @@ const Item = ({
   const [state, dispatch] = useImmerReducer(ourReducer, initialState);
 
   const updateProduct = () => {
+    // console.log(create, disabled);
     if (!disabled) {
       setDisabled((disabled) => !disabled);
+      // if (create) {
+      //   setDisabled((disabled) => !disabled);
+      // }
       console.log(state);
       const checkErr = [];
       for (const key in state) {
@@ -127,7 +131,7 @@ const Item = ({
       if (!checkErr.length) {
         const { companyName, address, contactNumber, stock } = state;
         const fd = new FormData();
-
+        fd.append(`name`, companyName.value);
         fd.append(`category`, selectedResource._id);
         fd.append(`companyName`, companyName.value);
         fd.append(`address`, address.value);

@@ -42,12 +42,16 @@ const Search = (props) => {
               address,
               companyName,
               city,
+              likes,
+              dislikes,
             }) => (
               <Item
                 name={name}
                 stock={stock}
                 key={_id}
                 id={_id}
+                likes={likes}
+                dislikes={dislikes}
                 city={city}
                 companyName={companyName}
                 address={address}
