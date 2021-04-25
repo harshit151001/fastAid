@@ -27,7 +27,7 @@ const ScrollToTop = withRouter(({ children, location: { pathname } }) => {
 });
 
 const App = () => {
-  const [city, setCity] = useState("60825bf9e03e88eae79f5b75");
+  const [city, setCity] = useState("6085272862ce493a176fe1f0");
   const [cities, setCities] = useState([]);
   const [categories, setCategories] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");

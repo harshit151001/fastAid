@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Item from "../Components/Cards/Item";
 import ItemsList from "../Components/Lists/ItemsList";
 import { withRouter, Link } from "react-router-dom";
-import { getItemsFromQuery, getItems } from "../Helper/Enpoints/Endpoints";
+import { getItemsFromQuery } from "../Helper/Enpoints/Endpoints";
 
 const Search = (props) => {
   const { cityId, searchQuery, page } = props.match.params;
@@ -12,18 +12,8 @@ const Search = (props) => {
     let mounted = true;
     if (mounted) {
       const getAndSetItems = async () => {
-        console.log("search", searchQuery);
-        if (
-          searchQuery === "" ||
-          searchQuery === null ||
-          searchQuery === undefined
-        ) {
-          const response = await getItems(page, cityId);
-          setItems(response);
-        } else {
-          const response = await getItemsFromQuery(page, cityId, searchQuery);
-          setItems(response);
-        }
+        const response = await getItemsFromQuery(page, cityId, searchQuery);
+        setItems(response);
       };
       getAndSetItems();
     }

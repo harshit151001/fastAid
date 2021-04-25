@@ -15,11 +15,13 @@ const Navbar = ({
   setSearchQuery,
   history,
   location,
+  match,
   cityfs,
   setCityFs,
   setSearchedItems,
 }) => {
   const { pathname } = location;
+  console.log("Match", match);
 
   useEffect(() => {
     if (
@@ -50,7 +52,6 @@ const Navbar = ({
   const redirectToSearch = (e) => {
     e.preventDefault();
     const getAndSetItems = async () => {
-      console.log("search", searchQuery);
       if (
         searchQuery === "" ||
         searchQuery === null ||
@@ -64,11 +65,11 @@ const Navbar = ({
       }
     };
     getAndSetItems();
-    history.push(`/search/${city}/${searchQuery}/${1}`);
+    history.push(`/search/${pathname.split("/")[2]}/${searchQuery}/${1}`);
   };
 
   return (
-    <nav style={{ zIndex: 100 }} className="navbar-dark bg-dark">
+    <nav style={{ zIndex: 1000 }} className="navbar-dark bg-dark">
       <div className="container-fluid d-md-flex p-2 justify-content-between">
         <div className="d-flex justify-content-between">
           <div className="navbar-brand order-0 text-success">
@@ -137,7 +138,6 @@ const Navbar = ({
             state: { seller: 1 },
           }}
           className="text-decoration-none"
-          // to={isAuthenticated() ? "/dashboard" : "/login"}
         >
           <button className="btn btn-outline-success d-none d-md-block">
             {isAuthenticated() ? "Dashboard" : "Log in"}
