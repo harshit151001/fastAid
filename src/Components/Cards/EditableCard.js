@@ -94,9 +94,11 @@ const Item = ({
     },
   };
 
-  const [disabled, setDisabled] = useState(true);
+  const [disabled, setDisabled] = useState(!create);
   const [selectedCity, setSelectedCity] = useState(city);
   const [selectedResource, setSelectedResource] = useState(category);
+
+  // const [created, setCreated] = useState(create);
 
   // console.log("Create", create);
 
@@ -114,12 +116,10 @@ const Item = ({
   const [state, dispatch] = useImmerReducer(ourReducer, initialState);
 
   const updateProduct = () => {
-    // console.log(create, disabled);
+    console.log(create, disabled);
     if (!disabled) {
       setDisabled((disabled) => !disabled);
-      // if (create) {
-      //   setDisabled((disabled) => !disabled);
-      // }
+
       console.log(state);
       const checkErr = [];
       for (const key in state) {
