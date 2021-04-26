@@ -39,6 +39,7 @@ const Navbar = ({
         if (pathname !== "/dashboard") {
           const newPath = pathname.split("/");
           newPath[2] = item._id;
+          newPath[pathname.split("/").length - 1] = 1;
           history.push(newPath.join("/"));
         }
         setCityFs(city);

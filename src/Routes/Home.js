@@ -7,7 +7,6 @@ import { withRouter, Link } from "react-router-dom";
 const Home = ({ match, history }) => {
   const [items, setItems] = useState([]);
   const { cityId, page } = match.params;
-  console.log(cityId, page);
 
   useEffect(() => {
     let mounted = true;

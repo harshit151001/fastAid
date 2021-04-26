@@ -98,10 +98,6 @@ const Item = ({
   const [selectedCity, setSelectedCity] = useState(city);
   const [selectedResource, setSelectedResource] = useState(category);
 
-  // const [created, setCreated] = useState(create);
-
-  // console.log("Create", create);
-
   const onchangeSelect = (item) => {
     setSelectedCity(item);
   };
@@ -176,7 +172,7 @@ const Item = ({
   return (
     <div style={{ zIndex }} className="col-md col-md-6">
       <div className="card shadow-sm rounded input-group p-2 px-3 my-2 card-special">
-        <div style={{ zIndex: 10002 }} className="mb-0">
+        <div style={{ zIndex: 10002 }} className="mb-0 py-2">
           <div className="my-0 text-success">
             <Select
               value={selectedResource}
@@ -189,7 +185,7 @@ const Item = ({
           </div>
         </div>
         <div className="mb-0 d-flex justify-content-between align-items-center">
-          <div className="text-muted mb-0">
+          <div className="text-muted mb-0 py-2">
             <input
               className="focus-border"
               style={{
@@ -208,7 +204,7 @@ const Item = ({
             />
           </div>
         </div>
-        <div style={{ zIndex: 10000 }} className="mb-0">
+        <div style={{ zIndex: 10000 }} className="mb-0 py-2">
           <Select
             value={selectedCity}
             onChange={onchangeSelect}
@@ -218,7 +214,7 @@ const Item = ({
             getOptionLabel={(option) => option.name}
           />
         </div>
-        <div className="mb-0">
+        <div className="mb-0 py-2">
           <input
             className="focus-border"
             style={{
@@ -236,7 +232,7 @@ const Item = ({
             value={state.address.value}
           />
         </div>
-        <div className="mb-0">
+        <div className="mb-0 py-2">
           <input
             className="focus-border"
             style={{
@@ -254,7 +250,7 @@ const Item = ({
             value={state.contactNumber.value}
           />
         </div>
-        <div className="mb-0">
+        <div className="mb-0 py-2">
           <input
             className="focus-border"
             style={{
@@ -292,7 +288,7 @@ const Item = ({
               className="btn btn-success p-1 mt-2"
               onClick={updateProduct}
             >
-              {disabled ? "Update" : "Save"}
+              {disabled ? "Edit" : "Save"}
             </button>
           </div>
         </div>
