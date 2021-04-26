@@ -7,6 +7,7 @@ const Item = ({ name, id, companyName, city, contactNumber, stock, address, user
   const [dislike, setDislike] = useState(+dislikes || 0);
   const created = new Date(createdAt);
   const updated = new Date(updatedAt);
+  console.log(createdAt);
 
   return (
     <div style={{ zIndex: '0' }} className="col-md col-md-6">

@@ -21,6 +21,7 @@ const Search = props => {
     if (mounted) {
       const getAndSetItems = async () => {
         const response = await getItemsFromQuery(page, cityId, searchQuery, selectedFilter._id);
+        console.log(response);
         setItems(response);
       };
       getAndSetItems();
@@ -41,7 +42,7 @@ const Search = props => {
       </div>
       <ItemsList>
         {items.length > 0 ? (
-          items.map(({ name, stock, _id, contactNumber, address, companyName, city, likes, dislikes }) => <Item name={name} stock={stock} key={_id} id={_id} likes={likes} dislikes={dislikes} city={city} companyName={companyName} address={address} contactNumber={contactNumber} />)
+          items.map(({ name, stock, _id, contactNumber, address, companyName, city, likes, dislikes, createdAt, updatedAt }) => <Item name={name} stock={stock} key={_id} id={_id} likes={likes} dislikes={dislikes} city={city} companyName={companyName} address={address} contactNumber={contactNumber} createdAt={createdAt} updatedAt={updatedAt} />)
         ) : (
           <div className="p-4">
             <p class="display-4 text-center">Sorry, No items matched your search.</p>
