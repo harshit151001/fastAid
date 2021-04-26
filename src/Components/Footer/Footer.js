@@ -10,18 +10,6 @@ const Footer = () => {
       <div className="p-0 m-0 flex-column flex-md-row d-flex align-items-center justify-content-center fs-6">
         <a
           className="text-success mx-2 text-decoration-none"
-          href="https://www.linkedin.com/in/harshit--shukla/"
-        >
-          Harshit Shukla
-        </a>
-        <a
-          className="text-success mx-2 text-decoration-none"
-          href="https://www.linkedin.com/in/tejas-deshpande-a14b351a7/"
-        >
-          Tejas Deshpande
-        </a>
-        <a
-          className="text-success mx-2 text-decoration-none"
           href="https://www.linkedin.com/in/abhijit-kumar-983546170/"
         >
           Abhijit Kumar
@@ -31,6 +19,19 @@ const Footer = () => {
           href="https://www.linkedin.com/in/sombuddha-chakravarty-9482b5131/"
         >
           Sombuddha Chakravarty
+        </a>
+
+        <a
+          className="text-success mx-2 text-decoration-none"
+          href="https://www.linkedin.com/in/harshit--shukla/"
+        >
+          Harshit Shukla
+        </a>
+        <a
+          className="text-success mx-2 text-decoration-none"
+          href="https://www.linkedin.com/in/tejas-deshpande-a14b351a7/"
+        >
+          Tejas Deshpande
         </a>
 
         <a
