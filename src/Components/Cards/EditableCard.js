@@ -113,7 +113,6 @@ const Item = ({
   const [state, dispatch] = useImmerReducer(ourReducer, initialState);
 
   const updateProduct = () => {
-    console.log(create, disabled);
     if (!disabled) {
       setDisabled((disabled) => !disabled);
 
