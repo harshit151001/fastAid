@@ -2,7 +2,10 @@ import React, { useState, useEffect } from "react";
 import Item from "../Components/Cards/Item";
 import ItemsList from "../Components/Lists/ItemsList";
 import { withRouter, Link } from "react-router-dom";
-import { getItemsFromQuery } from "../Helper/Enpoints/Endpoints";
+import {
+  getItemsFromQuery,
+  isAuthenticated,
+} from "../Helper/Enpoints/Endpoints";
 import Select from "react-select";
 
 const Search = (props) => {
@@ -45,7 +48,11 @@ const Search = (props) => {
           <div className="lead order-1 pe-3">Know some resources? </div>
           <Link
             className="order-2"
-            to={{ pathname: "/login", state: { seller: 0 } }}
+            to={
+              !isAuthenticated()
+                ? { pathname: "/login", state: { seller: 0 } }
+                : { pathname: "/dashboard" }
+            }
           >
             <button className="btn btn-success">Add Info</button>
           </Link>

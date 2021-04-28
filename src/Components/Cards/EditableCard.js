@@ -113,7 +113,6 @@ const Item = ({
   const [state, dispatch] = useImmerReducer(ourReducer, initialState);
 
   const updateProduct = () => {
-    console.log(create, disabled);
     if (!disabled) {
       setDisabled((disabled) => !disabled);
 
@@ -128,6 +127,7 @@ const Item = ({
       if (!checkErr.length) {
         const { companyName, address, contactNumber, stock } = state;
         const fd = new FormData();
+
         fd.append(`name`, selectedResource.name);
         fd.append(`category`, selectedResource._id);
         fd.append(`companyName`, companyName.value);
